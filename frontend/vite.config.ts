@@ -1,18 +1,12 @@
-import { fileURLToPath, URL } from 'node:url'
+// FILE: vite.config.js
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-
-// https://vitejs.dev/config/
+import { transformAssetUrls } from '@quasar/vite-plugin'
 export default defineConfig({
   plugins: [
-    vue(),
-    vueJsx(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+    vue({
+      template: { transformAssetUrls }
+    }),
+  ]
 })

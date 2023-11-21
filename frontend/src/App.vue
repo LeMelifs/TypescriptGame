@@ -1,10 +1,9 @@
-<script>
-
+<script setup lang="ts">
 </script>
 
 <template>
-<p>Login</p>
-  <q-btn color="black" label="Black" />
+  <q-btn color="purple" label="Purple" />
+  <q-banner rounded class="bg-purple-8 text-white" />
 </template>
 
 <style scoped>
