@@ -1,11 +1,13 @@
 
 <template>
   <q-layout view="hHh LpR fFr">
-
-    <Header />
+    <section v-if="curState === 'Login'">
       <Login />
-    <Footer />
-
+    </section>
+    <section v-else-if="curState === 'MainMenu'">
+      <Header />
+      <Footer />
+    </section>
   </q-layout>
 </template>
 
@@ -14,18 +16,16 @@
   import Footer from "./components/Footer.vue";
   import Login from "./views/Login.vue";
 
+  let curState = 'Login'
   export default {
     name: 'App',
     components: {
       Header, Footer, Login
+    },
+    data() {
+      return {
+        curState
+      };
     }
   }
 </script>
-
-<style scoped>
-.my_card {
-  width: 25rem;
-  border-radius: 8px;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-}
-</style>
