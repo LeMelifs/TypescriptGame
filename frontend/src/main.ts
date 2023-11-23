@@ -22,11 +22,13 @@ import '@quasar/extras/line-awesome/line-awesome.css'
 import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
 import 'quasar/src/css/index.sass'
 import App from './App.vue'
+import router from './router/index.ts'
 
 const myApp = createApp(App)
 
 myApp.use(Quasar, {
     plugins: {},
 })
+myApp.use(router)
 
 myApp.mount('#app')

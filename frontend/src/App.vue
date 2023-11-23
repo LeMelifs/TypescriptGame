@@ -1,6 +1,7 @@
 
 <template>
   <q-layout view="hHh LpR fFr">
+    <router-view />
     <section v-if="curState === 'Login'">
       <Login />
     </section>
@@ -8,10 +9,13 @@
       <Header />
       <Footer />
     </section>
+    <nav>
+      <router-link :to="{ name: 'main_menu' }">Main menu</router-link>
+    </nav>
   </q-layout>
 </template>
 
-<script >
+<script lang="ts">
   import Header from './components/Header.vue'
   import Footer from "./components/Footer.vue";
   import Login from "./views/Login.vue";
