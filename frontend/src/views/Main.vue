@@ -9,8 +9,8 @@
         </q-card-section>
 
         <q-card-actions vertical align="center">
-          <q-btn flat class="full-width">Играть</q-btn>
-          <q-btn flat class="full-width">Сменить игрока</q-btn>
+          <q-btn @click.prevent="onGameClick()" flat class="full-width">Играть</q-btn>
+          <q-btn @click.prevent="onLoginClick()" flat class="full-width">Сменить игрока</q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -25,6 +25,14 @@ import Footer from "../components/Footer.vue";
 
 export default {
   name: 'Main',
-  components: { Header, Footer }
+  components: { Header, Footer },
+  methods: {
+    onGameClick(){
+      this.$router.push('/game')
+    },
+    onLoginClick(){
+      this.$router.push('/')
+    }
+  }
 }
 </script>

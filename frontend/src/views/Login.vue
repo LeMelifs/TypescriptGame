@@ -11,7 +11,7 @@
           <q-input dense outlined class="q-mt-md" v-model="password" type="password" label="Пароль"></q-input>
         </q-card-section>
         <q-card-section>
-          <q-btn style="border-radius: 8px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width"></q-btn>
+          <q-btn @click.prevent="mainMenuClick()" style="border-radius: 8px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width"></q-btn>
         </q-card-section>
 
       </q-card>
@@ -21,6 +21,11 @@
 
 <script lang="ts">
 export default {
-  name: 'Login'
-}
+  name: 'Login',
+  methods: {
+    mainMenuClick(){
+      this.$router.push('/main_menu');
+    }
+  }
+};
 </script>
