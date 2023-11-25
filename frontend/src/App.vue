@@ -1,22 +1,17 @@
 
 <template>
   <q-layout view="hHh LpR fFr">
-    <router-view />
-<!--    <section v-if="curState === 'Login'">-->
-<!--      <Login />-->
-<!--    </section>-->
-<!--    <section v-else-if="curState === 'MainMenu'">-->
-<!--      <Header />-->
-<!--      <Footer />-->
-<!--    </section>-->
-    <nav>
-      <router-link :to="{ name: 'main_menu' }">Main menu</router-link><br>
-      <router-link :to="{ name: 'game' }">Game</router-link>
-    </nav>
+    <section v-if="curState === 'Login'">
+      <Login />
+    </section>
+    <section v-else-if="curState === 'MainMenu'">
+      <Header />
+      <Footer />
+    </section>
   </q-layout>
 </template>
 
-<script lang="ts">
+<script >
   import Header from './components/Header.vue'
   import Footer from "./components/Footer.vue";
   import Login from "./views/Login.vue";
