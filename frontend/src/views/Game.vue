@@ -3,7 +3,6 @@ import Card from '../components/Card.vue'
 import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
-
 export default {
   name: 'Game',
   components: {
@@ -40,7 +39,6 @@ export default {
         userSelection.value[0] = payload
       }
     }
-
     watch(userSelection, currentValue => {
       if (currentValue.length === 2) {
         const cardOne = currentValue[0]
@@ -56,7 +54,6 @@ export default {
         userSelection.value.length = 0
       }
     }, { deep: true })
-
     return {
       cardList,
       flipCard,
@@ -68,16 +65,16 @@ export default {
 </script>
 
 <template>
-<section class="game-board">
-  <Card v-for="(card, index) in cardList"
-        :key="`card-${index}`"
-        :value="card.value"
-        :matched="card.matched"
-        :visible="card.visible"
-        :position="card.position"
-        @select-card="flipCard"
-  />
-</section>
+  <section class="game-board">
+    <Card v-for="(card, index) in cardList"
+          :key="`card-${index}`"
+          :value="card.value"
+          :matched="card.matched"
+          :visible="card.visible"
+          :position="card.position"
+          @select-card="flipCard"
+    />
+  </section>
   <h2 style="text-align: center">{{ status }}</h2>
 </template>
 
