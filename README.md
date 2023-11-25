@@ -32,4 +32,4 @@
 
 ## Roadmap
 
-![image](https://github.com/LeMelifs/TypescriptGame/assets/147232363/e08515ca-6428-4766-8583-d8656ebe4080)
+![image](https://github.com/LeMelifs/TypescriptGame/assets/147232363/92790967-92e7-46e7-9678-ee3d82e12dcd)
