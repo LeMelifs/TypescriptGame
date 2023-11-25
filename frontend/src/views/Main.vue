@@ -19,7 +19,12 @@
   </q-layout>
 </template>
 
-<script setup lang="ts">
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
+<script lang="ts">
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+
+export default {
+  name: 'Main',
+  components: { Header, Footer }
+}
 </script>
