@@ -3,7 +3,7 @@
   <q-layout view="hHh LpR fFr">
 
     <Header />
-      <Login />
+    <Login />
     <Footer />
 
   </q-layout>
