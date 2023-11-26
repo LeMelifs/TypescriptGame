@@ -16,9 +16,23 @@
 
       <q-separator />
 
-      <q-card-section style="max-height: 50vh" >
+      <q-card-actions align="center">
+        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card ">
+          <q-card class="my-card q-ma-xl">
+          </q-card>
+        </div>
 
-      </q-card-section>
+        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card ">
+          <q-card class="my-card q-ma-xl" bordered: true>
+          </q-card>
+        </div>
+
+        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card">
+          <q-card class="my-card q-ma-xl">
+          </q-card>
+        </div>
+
+      </q-card-actions>
 
       <q-separator />
 
@@ -52,3 +66,31 @@ export default {
   }
 }
 </script>
+
+<style>
+  .cat_card {
+    background-image: url('/images/footer_imgages/cat.jpg');
+    background-size: 95px;
+    border-radius: 20px;
+    background-color: #9389ef;
+    position: relative;
+  }
+  .bunny_card {
+    background-image: url('/images/footer_imgages/bunny.jpg');
+    background-size: 95px;
+    border-radius: 20px;
+    position: relative;
+  }
+  .seal_card {
+    background-image: url('/images/footer_imgages/seal.jpg');
+    background-size: 98px;
+    border-radius: 20px;
+    position: relative;
+  }
+  .bg {
+    background-color: #9389ef;
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+  }
+</style>
