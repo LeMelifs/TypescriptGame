@@ -18,17 +18,17 @@
       <q-separator />
 
       <q-card-actions align="center">
-        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card shadow-3">
+        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card shadow-2">
           <q-card class="my-card q-ma-xl">
           </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card shadow-3" style="margin-left: 40px; margin-right: 40px">
+        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card shadow-2" style="margin-left: 40px; margin-right: 40px">
           <q-card class="my-card q-ma-xl" bordered: true>
           </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card shadow-3">
+        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card shadow-2">
           <q-card class="my-card q-ma-xl">
           </q-card>
         </div>
