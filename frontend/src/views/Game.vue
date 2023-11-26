@@ -10,6 +10,11 @@ export default {
   components: {
     Card
   },
+  methods: {
+    mainMenuClick(){
+      this.$router.push('/main_menu');
+    }
+  },
   setup() {
     const cardList = ref([])
     const userSelection = ref([])
@@ -111,9 +116,9 @@ export default {
 </script>
 
 <template>
-
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
+      <h4 class="level">1-ый уровень</h4>
   <div class="game-board">
     <Card v-for="(card, index) in cardList"
           :key="`card-${index}`"
@@ -124,13 +129,24 @@ export default {
           @select-card="flipCard"
     />
   </div>
-  <div style="text-align: center; margin-top: 30px"><button @click="restartGame">Shuffle Cards</button></div>
+  <div style="text-align: center; margin-top: 15px"><button @click="restartGame">Shuffle Cards</button></div>
+      <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()"><q-btn style="background: #FF0080; color: white;" label="Выход" /></div>
   </q-layout>
   </div>
 </template>
 
 
 <style scoped>
+
+.level {
+  color: white;
+  font-family: Ebrima, serif;
+  text-align: center;
+  margin-top: 2px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
 .bg-image {
   background-color: #c7b3b7;
   background-image: url("/images/background.png");
@@ -139,10 +155,10 @@ export default {
 
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-column-gap: 30px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-row-gap: 30px;
+  grid-template-columns: 90px 90px 90px 90px;
+  grid-column-gap: 20px;
+  grid-template-rows: 120px 120px 120px 120px;
+  grid-row-gap: 20px;
   justify-content: center;
   margin-top: 30px;
 }

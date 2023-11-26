@@ -44,8 +44,6 @@ export default {
 
 <style scoped>
 .card {
-  border: 5px solid #ccc;
-  text-align: center;
   position: relative;
 }
 
@@ -53,6 +51,7 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
+  border-radius: 10px;
 }
 
 .card-face.is-front {
@@ -61,8 +60,8 @@ export default {
 }
 
 .card-face.is-back {
-  background-image: url('/images/heart.png');
-  background-size: 90px;
+  background-image: url('/images/background-for-card.jpg');
+  background-size: 121px;
   background-repeat: no-repeat;
   background-color: whitesmoke;
   color: white;
