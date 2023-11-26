@@ -31,12 +31,8 @@ export default {
       return remainingCards / 2
     })
 
-    const shuffleCards = () => {
-      cardList.value = _.shuffle(cardList.value)
-    }
-
     const restartGame = () => {
-      shuffleCards()
+      cardList.value = _.shuffle(cardList.value)
 
       cardList.value = cardList.value.map((card, index) => {
         return {
@@ -53,12 +49,14 @@ export default {
     cardItems.forEach(item => {
       cardList.value.push({
         value: item,
+        variant: 1,
         visible: false,
         position: null,
         matched: false
       })
       cardList.value.push({
         value: item,
+        variant: 2,
         visible: false,
         position: null,
         matched: false
@@ -108,7 +106,6 @@ export default {
       flipCard,
       userSelection,
       status,
-      shuffleCards,
       restartGame
     }
   }
@@ -119,16 +116,16 @@ export default {
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
       <h4 class="level">1-ый уровень</h4>
-  <div class="game-board">
+  <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card v-for="(card, index) in cardList"
-          :key="`card-${index}`"
+          :key="`${card.value}-${card.variant}`"
           :value="card.value"
           :matched="card.matched"
           :visible="card.visible"
           :position="card.position"
           @select-card="flipCard"
     />
-  </div>
+  </transition-group>
   <div style="text-align: center; margin-top: 15px"><button @click="restartGame">Shuffle Cards</button></div>
       <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()"><q-btn style="background: #FF0080; color: white;" label="Выход" /></div>
   </q-layout>
@@ -161,5 +158,9 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 30px;
+}
+
+.shuffle-card-move {
+  transition: transform 0.8s ease-in;
 }
 </style>
