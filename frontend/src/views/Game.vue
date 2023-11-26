@@ -48,7 +48,7 @@ export default {
       })
     }
 
-    const cardItems = [1, 2, 3, 4, 5, 6, 7, 8]
+    const cardItems = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8']
 
     cardItems.forEach(item => {
       cardList.value.push({
@@ -155,7 +155,7 @@ export default {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 90px);
+  grid-template-columns: repeat(4, 100px);
   grid-column-gap: 20px;
   grid-template-rows: repeat(4, 120px);
   grid-row-gap: 20px;
