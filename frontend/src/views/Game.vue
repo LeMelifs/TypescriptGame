@@ -84,8 +84,9 @@ export default {
           cardList.value[cardTwo.position].matched = true
         }
         else {
+          setTimeout(() => {
           cardList.value[cardOne.position].visible = false
-          cardList.value[cardTwo.position].visible = false
+          cardList.value[cardTwo.position].visible = false}, 1000)
         }
         userSelection.value.length = 0
       }
