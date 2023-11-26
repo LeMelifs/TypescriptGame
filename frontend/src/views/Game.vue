@@ -111,7 +111,10 @@ export default {
 </script>
 
 <template>
-  <section class="game-board">
+
+  <div class="q-pa-md bg-image">
+    <q-layout class="vertical-center">
+  <div class="game-board">
     <Card v-for="(card, index) in cardList"
           :key="`card-${index}`"
           :value="card.value"
@@ -120,11 +123,20 @@ export default {
           :position="card.position"
           @select-card="flipCard"
     />
-  </section>
+  </div>
   <div style="text-align: center; margin-top: 30px"><button @click="restartGame">Shuffle Cards</button></div>
+  </q-layout>
+  </div>
 </template>
 
+
 <style scoped>
+.bg-image {
+  background-color: #c7b3b7;
+  background-image: url("/images/background.png");
+  background-size: 1000px;
+}
+
 .game-board {
   display: grid;
   grid-template-columns: 100px 100px 100px 100px;
@@ -132,6 +144,6 @@ export default {
   grid-template-rows: 100px 100px 100px 100px;
   grid-row-gap: 30px;
   justify-content: center;
-  margin-top: 10vh;
+  margin-top: 30px;
 }
 </style>

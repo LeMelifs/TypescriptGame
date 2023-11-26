@@ -38,7 +38,6 @@ export default {
       {{ value }} - {{ position }}
     </div>
     <div v-else class="card-face is-back">
-       Back
     </div>
   </div>
 </template>
@@ -62,7 +61,10 @@ export default {
 }
 
 .card-face.is-back {
-  background-color: blue;
+  background-image: url('/images/heart.png');
+  background-size: 90px;
+  background-repeat: no-repeat;
+  background-color: whitesmoke;
   color: white;
 }
 </style>
