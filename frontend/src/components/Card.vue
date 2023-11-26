@@ -35,7 +35,8 @@ export default {
 <template>
   <div class="card" @click="selectCard">
     <div v-if="visible" class="card-face is-front">
-      {{ value }} - {{ position }}
+      {{ value }}
+      <img v-if="matched" src="/images/checkmark.png" alt="checkmark" class="icon-checkmark">
     </div>
     <div v-else class="card-face is-back">
     </div>
@@ -43,6 +44,13 @@ export default {
 </template>
 
 <style scoped>
+.icon-checkmark {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+}
+
 .card {
   position: relative;
 }
@@ -55,7 +63,7 @@ export default {
 }
 
 .card-face.is-front {
-  background-color: red;
+  background-color: white;
   color: white;
 }
 

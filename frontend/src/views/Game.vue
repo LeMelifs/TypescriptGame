@@ -155,9 +155,9 @@ export default {
 
 .game-board {
   display: grid;
-  grid-template-columns: 90px 90px 90px 90px;
+  grid-template-columns: repeat(4, 90px);
   grid-column-gap: 20px;
-  grid-template-rows: 120px 120px 120px 120px;
+  grid-template-rows: repeat(4, 120px);
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 30px;
