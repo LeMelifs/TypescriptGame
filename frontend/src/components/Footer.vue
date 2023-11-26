@@ -9,25 +9,26 @@
     </q-toolbar>
   </q-footer>
   <q-dialog v-model="dialog" :position="position">
-    <q-card style="width: 700px; max-width: 80vw; height: 300px;">
-      <q-card-section >
+    <q-card style="width: 700px; max-width: 80vw; height: 265px;">
+      <q-card-actions align="center" class="bg-purple-1">
         <div class="text-h6 text-weight-bold" >Выбор темы</div>
-      </q-card-section>
+      </q-card-actions>
+
 
       <q-separator />
 
       <q-card-actions align="center">
-        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card ">
+        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card shadow-3">
           <q-card class="my-card q-ma-xl">
           </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card ">
+        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card shadow-3" style="margin-left: 40px; margin-right: 40px">
           <q-card class="my-card q-ma-xl" bordered: true>
           </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card">
+        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card shadow-3">
           <q-card class="my-card q-ma-xl">
           </q-card>
         </div>
@@ -36,10 +37,10 @@
 
       <q-separator />
 
-      <q-card-actions align="center">
-        <q-btn flat label="Котики" color="purple-5" class="q-mx-xl" v-close-popup />
-        <q-btn flat label="Зайчики" color="purple-5" class="q-mx-xl" v-close-popup />
-        <q-btn flat label="Нерпы" color="purple-5" class="q-mx-xl" v-close-popup />
+      <q-card-actions align="center" class="bg-purple-1" style="height: 65px;">
+        <q-btn push text-color="purple-5" label="Котики" color="white" style="width: 155px" v-close-popup />
+        <q-btn push text-color="purple-5" label="Зайчики" color="white" style="width: 155px" v-close-popup />
+        <q-btn push text-color="purple-5" label="Нерпы" color="white" style="width: 155px" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -72,25 +73,21 @@ export default {
     background-image: url('/images/footer_imgages/cat.jpg');
     background-size: 95px;
     border-radius: 20px;
-    background-color: #9389ef;
     position: relative;
+    border: 2px solid #d6bbf8;
   }
   .bunny_card {
     background-image: url('/images/footer_imgages/bunny.jpg');
     background-size: 95px;
     border-radius: 20px;
     position: relative;
+    border: 2px solid #d6bbf8;
   }
   .seal_card {
     background-image: url('/images/footer_imgages/seal.jpg');
     background-size: 98px;
     border-radius: 20px;
     position: relative;
-  }
-  .bg {
-    background-color: #9389ef;
-    border-radius: 20px;
-    height: 100px;
-    width: 100px;
+    border: 2px solid #d6bbf8;
   }
 </style>
