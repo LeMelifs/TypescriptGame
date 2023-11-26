@@ -85,6 +85,19 @@ export default {
       }
     }
 
+    function start() {
+      const clock = document.getElementById("time");
+      let time = -1, intervalId;
+      function incrementTime() {
+        time++;
+        clock.textContent =
+            ("0" + Math.trunc(time / 60)).slice(-2) +
+            ":" + ("0" + (time % 60)).slice(-2);
+      }
+      incrementTime();
+      intervalId = setInterval(incrementTime, 1000);
+    }
+
     watch(userSelection, currentValue => {
       if (currentValue.length === 2) {
         const cardOne = currentValue[0]
@@ -106,7 +119,8 @@ export default {
       flipCard,
       userSelection,
       status,
-      restartGame
+      restartGame,
+      start
     }
   }
 }
@@ -115,7 +129,7 @@ export default {
 <template>
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
-      <h4 class="level">1-ый уровень</h4>
+      <h4 class="level" id="time">00:00</h4>
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card v-for="(card) in cardList"
           :key="`${card.value}-${card.variant}`"
@@ -127,6 +141,7 @@ export default {
     />
   </transition-group>
   <div style="text-align: center; margin-top: 15px"><button @click="restartGame">Shuffle Cards</button></div>
+      <div style="text-align: center; margin-top: 10px" @click.prevent="start()"><q-btn style="background: #FF0080; color: white;" label="Начать игру" /></div>
       <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()"><q-btn style="background: #FF0080; color: white;" label="Выход" /></div>
   </q-layout>
   </div>
@@ -141,7 +156,7 @@ export default {
   text-align: center;
   margin-top: 2px;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .bg-image {
@@ -157,7 +172,7 @@ export default {
   grid-template-rows: repeat(4, 120px);
   grid-row-gap: 20px;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .shuffle-card-move {
