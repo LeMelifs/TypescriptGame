@@ -117,7 +117,7 @@ export default {
     <q-layout class="vertical-center">
       <h4 class="level">1-ый уровень</h4>
   <transition-group tag="section" class="game-board" name="shuffle-card">
-    <Card v-for="(card, index) in cardList"
+    <Card v-for="(card) in cardList"
           :key="`${card.value}-${card.variant}`"
           :value="card.value"
           :matched="card.matched"
