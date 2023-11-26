@@ -4,6 +4,7 @@ import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
+
 export default {
   name: 'Game',
   components: {
@@ -120,8 +121,7 @@ export default {
           @select-card="flipCard"
     />
   </section>
-  <h2 style="text-align: center">{{ status }}</h2>
-  <button @click="restartGame">Shuffle Cards</button>
+  <div style="text-align: center; margin-top: 30px"><button @click="restartGame">Shuffle Cards</button></div>
 </template>
 
 <style scoped>
@@ -132,5 +132,6 @@ export default {
   grid-template-rows: 100px 100px 100px 100px;
   grid-row-gap: 30px;
   justify-content: center;
+  margin-top: 10vh;
 }
 </style>
