@@ -3,6 +3,7 @@ import Card from '../components/Card.vue'
 import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
+import _ from 'lodash'
 export default {
   name: 'Game',
   components: {
@@ -18,10 +19,29 @@ export default {
         return `Remaining pairs: ${remainingPairs.value}`
       }
     })
+
     const remainingPairs = computed(() => {
       const remainingCards = cardList.value.filter(card => card.matched === false).length
       return remainingCards / 2
     })
+
+    const shuffleCards = () => {
+      cardList.value = _.shuffle(cardList.value)
+    }
+
+    const restartGame = () => {
+      shuffleCards()
+
+      cardList.value = cardList.value.map((card, index) => {
+        return {
+          ...card,
+          matched: false,
+          visible: false,
+          position: index
+        }
+      })
+    }
+
     for (let i = 0; i < 16; i++) {
       cardList.value.push({
         value: i,
@@ -30,6 +50,7 @@ export default {
         matched: false
       })
     }
+
     const flipCard = (payload: any) => {
       cardList.value[payload.position].visible = true
       if (userSelection.value[0]) {
@@ -58,7 +79,9 @@ export default {
       cardList,
       flipCard,
       userSelection,
-      status
+      status,
+      shuffleCards,
+      restartGame
     }
   }
 }
@@ -76,6 +99,7 @@ export default {
     />
   </section>
   <h2 style="text-align: center">{{ status }}</h2>
+  <button @click="restartGame">Shuffle Cards</button>
 </template>
 
 <style scoped>
