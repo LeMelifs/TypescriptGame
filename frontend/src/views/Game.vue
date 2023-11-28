@@ -4,8 +4,6 @@ import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
-import Footer from "../components/Footer.vue";
-import footer from "../components/Footer.vue";
 
 export default {
   name: 'Game',
