@@ -1,7 +1,10 @@
-
 <template>
   <q-layout view="hHh LpR fFr">
     <router-view />
+    <nav>
+      <router-link :to="{ name: 'main_menu' }">Main menu</router-link><br>
+      <router-link :to="{ name: 'game' }">Game</router-link>
+    </nav>
   </q-layout>
 </template>
 
