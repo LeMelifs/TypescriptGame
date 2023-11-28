@@ -11,9 +11,23 @@ export default {
     Card
   },
   methods: {
-    mainMenuClick(){
-      this.$router.push('/main_menu');
+    mainMenuClick() {
+      this.$router.push('/main_menu')
+    },
+    start() {
+      const clock = document.getElementById('time')
+      let time: number = -1, intervalId
+      function incrementTime() {
+        time++
+        clock.textContent =
+          ('0' + Math.trunc(time / 60)).slice(-2) + ':' + ('0' + (time % 60)).slice(-2)
+      }
+      incrementTime()
+      intervalId = setInterval(incrementTime, 1000)
     }
+  },
+  mounted: function(){
+    this.start()
   },
   setup() {
     const cardList = ref([])
@@ -27,13 +41,12 @@ export default {
     })
 
     const remainingPairs = computed(() => {
-      const remainingCards = cardList.value.filter(card => card.matched === false).length
+      const remainingCards: number = cardList.value.filter((card) => card.matched === false).length
       return remainingCards / 2
     })
 
     const restartGame = () => {
       cardList.value = _.shuffle(cardList.value)
-
       cardList.value = cardList.value.map((card, index) => {
         return {
           ...card,
@@ -44,9 +57,9 @@ export default {
       })
     }
 
-    const cardItems = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8']
+    const cardItems: string[] = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8']
 
-    cardItems.forEach(item => {
+    cardItems.forEach((item) => {
       cardList.value.push({
         value: item,
         variant: 1,
@@ -71,56 +84,47 @@ export default {
     })
 
     const flipCard = (payload: any) => {
-      cardList.value[payload.position].visible = true
-      if (userSelection.value[0]) {
-        if ((userSelection.value[0].position === payload.position) &&
-            (userSelection.value[0].faceValue === payload.faceValue)) {
-          return
+        cardList.value[payload.position].visible = true
+        if (userSelection.value[0]) {
+          if (
+            userSelection.value[0].position === payload.position &&
+            userSelection.value[0].faceValue === payload.faceValue
+          ) {
+            return
+          } else {
+            userSelection.value[1] = payload
+          }
         } else {
-          userSelection.value[1] = payload
+          userSelection.value[0] = payload
         }
-      }
-      else {
-        userSelection.value[0] = payload
-      }
     }
 
-    function start() {
-      const clock = document.getElementById("time");
-      let time = -1, intervalId;
-      function incrementTime() {
-        time++;
-        clock.textContent =
-            ("0" + Math.trunc(time / 60)).slice(-2) +
-            ":" + ("0" + (time % 60)).slice(-2);
-      }
-      incrementTime();
-      intervalId = setInterval(incrementTime, 1000);
-    }
-
-    watch(userSelection, currentValue => {
-      if (currentValue.length === 2) {
-        const cardOne = currentValue[0]
-        const cardTwo = currentValue[1]
-        if (cardOne.faceValue === cardTwo.faceValue) {
-          cardList.value[cardOne.position].matched = true
-          cardList.value[cardTwo.position].matched = true
+    watch(
+      userSelection,
+      (currentValue) => {
+        if (currentValue.length === 2) {
+          const cardOne = currentValue[0]
+          const cardTwo = currentValue[1]
+          if (cardOne.faceValue === cardTwo.faceValue) {
+            cardList.value[cardOne.position].matched = true
+            cardList.value[cardTwo.position].matched = true
+          } else {
+            setTimeout(() => {
+              cardList.value[cardOne.position].visible = false
+              cardList.value[cardTwo.position].visible = false
+            }, 1000)
+          }
+          userSelection.value.length = 0
         }
-        else {
-          setTimeout(() => {
-          cardList.value[cardOne.position].visible = false
-          cardList.value[cardTwo.position].visible = false}, 1000)
-        }
-        userSelection.value.length = 0
-      }
-    }, { deep: true })
+      },
+      { deep: true }
+    )
     return {
       cardList,
       flipCard,
       userSelection,
       status,
-      restartGame,
-      start
+      restartGame
     }
   }
 }
@@ -130,26 +134,28 @@ export default {
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
       <h4 class="level" id="time">00:00</h4>
-  <transition-group tag="section" class="game-board" name="shuffle-card">
-    <Card v-for="(card) in cardList"
+      <transition-group tag="section" class="game-board" name="shuffle-card">
+        <Card
+          v-for="card in cardList"
           :key="`${card.value}-${card.variant}`"
           :value="card.value"
           :matched="card.matched"
           :visible="card.visible"
           :position="card.position"
           @select-card="flipCard"
-    />
-  </transition-group>
-  <div style="text-align: center; margin-top: 15px"><button @click="restartGame">Shuffle Cards</button></div>
-      <div style="text-align: center; margin-top: 10px" @click.prevent="start()"><q-btn style="background: #FF0080; color: white;" label="Начать игру" /></div>
-      <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()"><q-btn style="background: #FF0080; color: white;" label="Выход" /></div>
-  </q-layout>
+        />
+      </transition-group>
+      <div style="text-align: center; margin-top: 15px">
+        <button @click="restartGame">Shuffle Cards</button>
+      </div>
+      <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()">
+        <q-btn style="background: #ff0080; color: white" label="Выход" />
+      </div>
+    </q-layout>
   </div>
 </template>
 
-
 <style scoped>
-
 .level {
   color: white;
   font-family: Ebrima, serif;
@@ -161,7 +167,7 @@ export default {
 
 .bg-image {
   background-color: #c7b3b7;
-  background-image: url("/images/background.png");
+  background-image: url('/images/background.png');
   background-size: 1000px;
 }
 
