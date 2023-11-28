@@ -1,4 +1,6 @@
 <script lang="ts">
+import {computed} from "@vue/runtime-core";
+
 export default {
   props: {
     matched: {
@@ -10,7 +12,7 @@ export default {
       required: true
     },
     value: {
-      type: Number,
+      type: String,
       required: true
     },
     visible: {
@@ -19,13 +21,19 @@ export default {
     },
   },
   setup(props: any, context: any) {
-    const selectCard = () => {
+    const flippedStyles = computed(() => {
+      if (props.visible) {
+        return 'is-flipped'
+      }
+    })
+    const selectCard = () : void => {
       context.emit('select-card', {
-        position: props.position,
-        faceValue: props.value
+        position: props.position as number,
+        faceValue: props.value as number,
       })
     }
     return {
+      flippedStyles,
       selectCard
     }
   }
@@ -33,36 +41,57 @@ export default {
 </script>
 
 <template>
-  <div class="card" @click="selectCard">
-    <div v-if="visible" class="card-face is-front">
-      {{ value }} - {{ matched}}
+  <div class="card" :class="flippedStyles"
+       @click="selectCard">
+    <div class="card-face is-front" style="text-align: center; color: black">
+      <img :src="`/images/${value}.jpg`" :alt="value" style="border-radius: 10px">
+      <img v-if="matched" src="/images/checkmark.png" alt="checkmark" class="icon-checkmark">
     </div>
-    <div v-else class="card-face is-back">
-       Back
+    <div class="card-face is-back">
     </div>
   </div>
 </template>
 
 <style scoped>
+
 .card {
-  border: 5px solid #ccc;
-  text-align: center;
   position: relative;
+  transition: 0.5s transform ease-in;
+  transform-style: preserve-3d;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
 }
 
 .card-face {
   width: 100%;
   height: 100%;
   position: absolute;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
 }
 
 .card-face.is-front {
-  background-color: red;
+  background-image: url('/images/cat_theme.png');
   color: white;
+  transform: rotateY(180deg);
 }
 
 .card-face.is-back {
-  background-color: blue;
+  background-image: url('/images/background-for-card.jpg');
+  background-size: 121px;
+  background-repeat: no-repeat;
   color: white;
+}
+
+.icon-checkmark {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
 }
 </style>

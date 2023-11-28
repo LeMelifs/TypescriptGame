@@ -3,11 +3,17 @@ import Card from '../components/Card.vue'
 import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
+import _ from 'lodash'
 
 export default {
   name: 'Game',
   components: {
     Card
+  },
+  methods: {
+    mainMenuClick(){
+      this.$router.push('/main_menu');
+    }
   },
   setup() {
     const cardList = ref([])
@@ -19,26 +25,77 @@ export default {
         return `Remaining pairs: ${remainingPairs.value}`
       }
     })
+
     const remainingPairs = computed(() => {
       const remainingCards = cardList.value.filter(card => card.matched === false).length
       return remainingCards / 2
     })
-    for (let i = 0; i < 16; i++) {
-      cardList.value.push({
-        value: i,
-        visible: false,
-        position: i,
-        matched: false
+
+    const restartGame = () => {
+      cardList.value = _.shuffle(cardList.value)
+
+      cardList.value = cardList.value.map((card, index) => {
+        return {
+          ...card,
+          matched: false,
+          visible: false,
+          position: index
+        }
       })
     }
+
+    const cardItems = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8']
+
+    cardItems.forEach(item => {
+      cardList.value.push({
+        value: item,
+        variant: 1,
+        visible: false,
+        position: null,
+        matched: false
+      })
+      cardList.value.push({
+        value: item,
+        variant: 2,
+        visible: false,
+        position: null,
+        matched: false
+      })
+    })
+
+    cardList.value = cardList.value.map((card, index) => {
+      return {
+        ...card,
+        position: index
+      }
+    })
+
     const flipCard = (payload: any) => {
       cardList.value[payload.position].visible = true
       if (userSelection.value[0]) {
-        userSelection.value[1] = payload
+        if ((userSelection.value[0].position === payload.position) &&
+            (userSelection.value[0].faceValue === payload.faceValue)) {
+          return
+        } else {
+          userSelection.value[1] = payload
+        }
       }
       else {
         userSelection.value[0] = payload
       }
+    }
+
+    function start() {
+      const clock = document.getElementById("time");
+      let time = -1, intervalId;
+      function incrementTime() {
+        time++;
+        clock.textContent =
+            ("0" + Math.trunc(time / 60)).slice(-2) +
+            ":" + ("0" + (time % 60)).slice(-2);
+      }
+      incrementTime();
+      intervalId = setInterval(incrementTime, 1000);
     }
 
     watch(userSelection, currentValue => {
@@ -50,44 +107,75 @@ export default {
           cardList.value[cardTwo.position].matched = true
         }
         else {
+          setTimeout(() => {
           cardList.value[cardOne.position].visible = false
-          cardList.value[cardTwo.position].visible = false
+          cardList.value[cardTwo.position].visible = false}, 1000)
         }
         userSelection.value.length = 0
       }
     }, { deep: true })
-
     return {
       cardList,
       flipCard,
       userSelection,
-      status
+      status,
+      restartGame,
+      start
     }
   }
 }
 </script>
 
 <template>
-<section class="game-board">
-  <Card v-for="(card, index) in cardList"
-        :key="`card-${index}`"
-        :value="card.value"
-        :matched="card.matched"
-        :visible="card.visible"
-        :position="card.position"
-        @select-card="flipCard"
-  />
-</section>
-  <h2 style="text-align: center">{{ status }}</h2>
+  <div class="q-pa-md bg-image">
+    <q-layout class="vertical-center">
+      <h4 class="level" id="time">00:00</h4>
+  <transition-group tag="section" class="game-board" name="shuffle-card">
+    <Card v-for="(card) in cardList"
+          :key="`${card.value}-${card.variant}`"
+          :value="card.value"
+          :matched="card.matched"
+          :visible="card.visible"
+          :position="card.position"
+          @select-card="flipCard"
+    />
+  </transition-group>
+  <div style="text-align: center; margin-top: 15px"><button @click="restartGame">Shuffle Cards</button></div>
+      <div style="text-align: center; margin-top: 10px" @click.prevent="start()"><q-btn style="background: #FF0080; color: white;" label="Начать игру" /></div>
+      <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()"><q-btn style="background: #FF0080; color: white;" label="Выход" /></div>
+  </q-layout>
+  </div>
 </template>
 
+
 <style scoped>
+
+.level {
+  color: white;
+  font-family: Ebrima, serif;
+  text-align: center;
+  margin-top: 2px;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.bg-image {
+  background-color: #c7b3b7;
+  background-image: url("/images/background.png");
+  background-size: 1000px;
+}
+
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-column-gap: 30px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-row-gap: 30px;
+  grid-template-columns: repeat(4, 100px);
+  grid-column-gap: 20px;
+  grid-template-rows: repeat(4, 120px);
+  grid-row-gap: 20px;
   justify-content: center;
+  margin-top: 10px;
+}
+
+.shuffle-card-move {
+  transition: transform 0.8s ease-in;
 }
 </style>
