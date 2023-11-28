@@ -76,6 +76,8 @@ export default {
       })
     })
 
+    cardList.value = _.shuffle(cardList.value)
+
     cardList.value = cardList.value.map((card, index) => {
       return {
         ...card,
@@ -151,6 +153,7 @@ export default {
       <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()">
         <q-btn style="background: #ff0080; color: white" label="Выход" />
       </div>
+
     </q-layout>
   </div>
 </template>
