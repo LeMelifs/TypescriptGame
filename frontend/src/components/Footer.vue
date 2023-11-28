@@ -38,9 +38,9 @@
       <q-separator />
 
       <q-card-actions align="center" class="bg-purple-1" style="height: 65px;">
-        <q-btn push text-color="purple-5" label="Котики" color="white" style="width: 155px" v-close-popup />
-        <q-btn push text-color="purple-5" label="Зайчики" color="white" style="width: 155px" v-close-popup />
-        <q-btn push text-color="purple-5" label="Нерпы" color="white" style="width: 155px" v-close-popup />
+        <q-btn @click="changeTheme('cat')" push text-color="purple-5" label="Котики" color="white" style="width: 155px" v-close-popup />
+        <q-btn @click="changeTheme('hare')" push text-color="purple-5" label="Зайчики" color="white" style="width: 155px" v-close-popup />
+        <q-btn @click="changeTheme('seal')" push text-color="purple-5" label="Нерпы" color="white" style="width: 155px" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -48,21 +48,31 @@
 
 <script lang="ts">
 import { ref } from 'vue'
+let theme = 'cat'
 export default {
   name: 'Footer',
-
+  methods: {
+    changeTheme(chosen_theme) {
+      theme = chosen_theme
+      console.log(theme)
+      debugger;
+    }
+  },
+  data() {
+    return {
+      theme: theme
+    }
+  },
   setup () {
     const dialog = ref(false)
     const position = ref('top')
-
     return {
       dialog,
       position,
-
       open (pos) {
         position.value = pos
         dialog.value = true
-      }
+      },
     }
   }
 }

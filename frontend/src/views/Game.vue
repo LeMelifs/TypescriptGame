@@ -4,6 +4,8 @@ import { ref } from '@vue/reactivity'
 import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
+import Footer from "../components/Footer.vue";
+import footer from "../components/Footer.vue";
 
 export default {
   name: 'Game',
@@ -50,7 +52,7 @@ export default {
       })
     }
 
-    const cardItems: string[] = ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8']
+    const cardItems: string[] = ['1', '2', '3', '4', '5', '6', '7', '8']
 
     cardItems.forEach((item) => {
       cardList.value.push({
@@ -107,6 +109,7 @@ export default {
           if (cardOne.faceValue === cardTwo.faceValue) {
             cardList.value[cardOne.position].matched = true
             cardList.value[cardTwo.position].matched = true
+            count = 0
           } else {
             setTimeout(() => {
               cardList.value[cardOne.position].visible = false
@@ -116,7 +119,9 @@ export default {
           }
           userSelection.value.length = 0
           if (remainingPairs.value === 0) {
-            restartGame()
+            setTimeout(() => {
+              restartGame()
+            }, 2000)
           }
         }
       },
