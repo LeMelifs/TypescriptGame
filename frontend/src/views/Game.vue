@@ -32,13 +32,6 @@ export default {
   setup() {
     const cardList = ref([])
     const userSelection = ref([])
-    const status = computed(() => {
-      if (remainingPairs.value === 0) {
-        return 'Player wins!'
-      } else {
-        return `Remaining pairs: ${remainingPairs.value}`
-      }
-    })
 
     const remainingPairs = computed(() => {
       const remainingCards: number = cardList.value.filter((card) => card.matched === false).length
@@ -77,7 +70,6 @@ export default {
     })
 
     cardList.value = _.shuffle(cardList.value)
-
     cardList.value = cardList.value.map((card, index) => {
       return {
         ...card,
@@ -85,20 +77,25 @@ export default {
       }
     })
 
+    let count: number = 0
     const flipCard = (payload: any) => {
+      if (count != 2) {
         cardList.value[payload.position].visible = true
         if (userSelection.value[0]) {
           if (
-            userSelection.value[0].position === payload.position &&
-            userSelection.value[0].faceValue === payload.faceValue
+              userSelection.value[0].position === payload.position &&
+              userSelection.value[0].faceValue === payload.faceValue
           ) {
             return
           } else {
             userSelection.value[1] = payload
+            count++
           }
         } else {
           userSelection.value[0] = payload
+          count++
         }
+      }
     }
 
     watch(
@@ -114,9 +111,13 @@ export default {
             setTimeout(() => {
               cardList.value[cardOne.position].visible = false
               cardList.value[cardTwo.position].visible = false
+              count = 0
             }, 1000)
           }
           userSelection.value.length = 0
+          if (remainingPairs.value === 0) {
+            restartGame()
+          }
         }
       },
       { deep: true }
@@ -125,7 +126,6 @@ export default {
       cardList,
       flipCard,
       userSelection,
-      status,
       restartGame
     }
   }
@@ -147,9 +147,6 @@ export default {
           @select-card="flipCard"
         />
       </transition-group>
-      <div style="text-align: center; margin-top: 15px">
-        <button @click="restartGame">Shuffle Cards</button>
-      </div>
       <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()">
         <q-btn style="background: #ff0080; color: white" label="Выход" />
       </div>
