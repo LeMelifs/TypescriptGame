@@ -5,10 +5,16 @@ import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
 
+let lvl;
 export default {
   name: 'Game',
   components: {
     Card
+  },
+  data() {
+    return {
+      lvl: lvl
+    }
   },
   methods: {
     mainMenuClick() {
@@ -40,6 +46,8 @@ export default {
 
     const restartGame = () => {
       cardList.value = _.shuffle(cardList.value)
+      lvl++
+      console.log(lvl)
       cardList.value = cardList.value.map((card, index) => {
         return {
           ...card,
@@ -50,7 +58,18 @@ export default {
       })
     }
 
-    const cardItems: string[] = ['1', '2', '3', '4', '5', '6', '7', '8']
+    lvl = 1
+
+    let cardItems = []
+    for (let i = 0;  i <= 0; i++) {
+      let a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
+      let b = a.toString()
+      while (cardItems.includes(b)) {
+        a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
+        b = a.toString()
+      }
+      cardItems.push(b)
+    }
 
     cardItems.forEach((item) => {
       cardList.value.push({
@@ -138,6 +157,7 @@ export default {
 <template>
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
+      <h3 class="level" :key="lvl">Уровень {{lvl}}</h3>
       <h4 class="level" id="time">00:00</h4>
       <transition-group tag="section" class="game-board" name="shuffle-card">
         <Card
@@ -176,7 +196,7 @@ export default {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(5, 100px);
   grid-column-gap: 20px;
   grid-template-rows: repeat(4, 120px);
   grid-row-gap: 20px;
@@ -185,6 +205,6 @@ export default {
 }
 
 .shuffle-card-move {
-  transition: transform 0.8s ease-in;
+  transition: transform 1s ease-in;
 }
 </style>
