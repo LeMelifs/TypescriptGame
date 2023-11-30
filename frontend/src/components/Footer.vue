@@ -10,8 +10,10 @@
   </q-footer>
   <q-dialog v-model="dialog" :position="position">
     <q-card style="width: 700px; max-width: 80vw; height: 265px;">
-      <q-card-actions align="center" class="bg-purple-1">
-        <div class="text-h6 text-weight-bold" >Выбор темы</div>
+      <q-card-actions class="bg-purple-1">
+        <div class="text-h6 text-weight-bold q-px-md" >Выбор темы</div>
+        <q-space></q-space>
+        <q-btn icon="close" flat  round dense v-close-popup></q-btn>
       </q-card-actions>
 
 
