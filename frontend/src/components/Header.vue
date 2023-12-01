@@ -31,7 +31,7 @@
           <q-icon name="star" />
         </q-item-section>
 
-        <q-item-section class="text-weight-bold flex-center q-pr-lg">
+        <q-item-section class="text-grey-9 text-weight-bold flex-center q-pr-lg" style="font-size: 20px">
           Таблица рекордов
         </q-item-section>
       </q-item>
