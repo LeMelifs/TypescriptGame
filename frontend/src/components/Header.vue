@@ -1,8 +1,8 @@
 <template>
-  <q-header reveal class="bg-purple-2 text-black" height-hint="98" style="border-bottom: 4px solid #d4abe1">
+  <q-header reveal class="bg-purple-2 text-black shadow-2" height-hint="98" style="border-bottom: 4px solid #d4abe1">
     <q-toolbar>
       <q-toolbar-title>
-        <div class="row justify-center text-weight-bold q-ml-xl">
+        <div class="row justify-center text-grey-9 text-h5 text-weight-bold q-ml-xl">
           Главное меню
         </div>
       </q-toolbar-title>
@@ -10,7 +10,7 @@
       <q-btn @click="drawerRight = !drawerRight" dense flat round icon="menu" />
     </q-toolbar>
   </q-header>
-  <q-drawer style="border-left: 4px solid #e1d3ea"
+  <q-drawer style="border-left: 4px solid #e1d3ea" class="shadow-20"
       side="right"
       v-model="drawerRight"
 

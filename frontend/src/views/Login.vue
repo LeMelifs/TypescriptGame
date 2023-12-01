@@ -1,17 +1,17 @@
 <template>
   <q-page-container>
-    <q-page class="flex flex-center bg-grey-2">
-      <q-card class="shadow-2 my_card" bordered>
+    <q-page class="flex flex-center bg-image">
+      <q-card class="shadow-2 my_card q-pa-sm shadow-20 " style="border-radius: 15px; border: 4px solid #d4abe1">
         <q-card-section class="text-center">
           <div class="text-grey-9 text-h5 text-weight-bold">Добро пожаловать, игрок!</div>
           <div class="text-grey-8">Введи свое имя и пароль, чтобы начать игру</div>
         </q-card-section>
         <q-card-section>
-          <q-input dense outlined v-model="email" label="Имя"></q-input>
+          <q-input dense outlined v-model="email" label="Имя" ></q-input>
           <q-input dense outlined class="q-mt-md" v-model="password" type="password" label="Пароль"></q-input>
         </q-card-section>
         <q-card-section>
-          <q-btn @click.prevent="mainMenuClick()" style="border-radius: 8px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width"></q-btn>
+          <q-btn @click.prevent="mainMenuClick()" style="border-radius: 15px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width" ></q-btn>
         </q-card-section>
 
       </q-card>
@@ -29,3 +29,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.bg-image {
+  background-image: url('/images/footer_imgages/bd_main.jpg');
+  background-size: 1600px;
+}
+</style>

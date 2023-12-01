@@ -1,17 +1,17 @@
 <template>
-  <q-footer reveal class="bg-grey-4 text-black" style="border-top: 4px solid #d8c9e1">
-    <q-toolbar>
+  <q-footer reveal class="bg-grey-4 text-grey-9  shadow-5" style="border-top: 4px solid #d8c9e1">
+    <q-toolbar >
       <q-btn dense flat round icon="arrow_upward" @click="open('bottom')"/>
       <q-separator black vertical inset class="q-ma-sm" />
       <q-toolbar-title>
-        <div>Выбор темы</div>
+        <div class="text-h6 text-weight-bold">Выбор темы</div>
       </q-toolbar-title>
     </q-toolbar>
   </q-footer>
   <q-dialog v-model="dialog" :position="position" >
     <q-card style="width: 700px; max-width: 80vw; height: 270px; border-start-start-radius: 15px; border-start-end-radius: 15px">
       <q-card-actions class="bg-purple-1" style="border-top: 4px solid #d6bde5; border-left: 4px solid #d6bde5; border-right: 4px solid #d6bde5">
-        <div class="text-h6 text-weight-bold q-px-md" >Выбор темы</div>
+        <div class="text-h6 text-weight-bold text-grey-9 q-px-md" >Выбор темы</div>
         <q-space></q-space>
         <q-btn icon="close" flat  round dense v-close-popup></q-btn>
       </q-card-actions>
@@ -40,9 +40,9 @@
       <q-separator />
 
       <q-card-actions align="center" class="bg-purple-1" style="height: 65px; border-left: 4px solid #d6bde5; border-right: 4px solid #d6bde5">
-        <q-btn @click="changeTheme('cat')" push text-color="purple-5" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('hare')" push text-color="purple-5" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('seal')" push text-color="purple-5" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('cat')" push text-color="purple-8" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('hare')" push text-color="purple-8" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('seal')" push text-color="purple-8" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
