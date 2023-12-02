@@ -42,7 +42,6 @@ export default {
     const restartGame = () => {
       cardList.value = _.shuffle(cardList.value)
       lvl.value++
-      console.log(lvl.value)
       cardList.value = cardList.value.map((card, index) => {
         return {
           ...card,
@@ -54,7 +53,7 @@ export default {
     }
 
     let cardItems = []
-    for (let i = 0;  i <= 9; i++) {
+    for (let i = 0;  i <= 0; i++) {
       let a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
       let b = a.toString()
       while (cardItems.includes(b)) {

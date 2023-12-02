@@ -40,9 +40,9 @@
       <q-separator />
 
       <q-card-actions align="center" class="bg-purple-1" style="height: 65px; border-left: 4px solid #d6bde5; border-right: 4px solid #d6bde5">
-        <q-btn @click="changeTheme('cat')" push text-color="purple-8" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('hare')" push text-color="purple-8" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('seal')" push text-color="purple-8" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('cat', 'Котики')" push text-color="purple-8" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('hare', 'Зайчики')" push text-color="purple-8" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('seal', 'Нерпы')" push text-color="purple-8" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -50,19 +50,20 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-let theme = 'cat'
+let theme = ref('cat')
+let rus_theme = ref('Котики')
 export default {
   name: 'Footer',
   methods: {
-    changeTheme(chosen_theme) {
-      theme = chosen_theme
-      console.log(theme)
-      debugger;
+    changeTheme(chosen_theme, rus) {
+      theme.value = chosen_theme
+      rus_theme.value = rus
     }
   },
   data() {
     return {
-      theme: theme
+      theme: theme,
+      rus_theme: rus_theme
     }
   },
   setup () {
