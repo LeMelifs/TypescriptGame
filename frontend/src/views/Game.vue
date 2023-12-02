@@ -5,16 +5,10 @@ import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
 
-let lvl;
 export default {
   name: 'Game',
   components: {
     Card
-  },
-  data() {
-    return {
-      lvl: lvl
-    }
   },
   methods: {
     mainMenuClick() {
@@ -30,7 +24,7 @@ export default {
       }
       incrementTime()
       intervalId = setInterval(incrementTime, 1000)
-    }
+    },
   },
   mounted: function(){
     this.start()
@@ -38,6 +32,7 @@ export default {
   setup() {
     const cardList = ref([])
     const userSelection = ref([])
+    const lvl = ref(1)
 
     const remainingPairs = computed(() => {
       const remainingCards: number = cardList.value.filter((card) => card.matched === false).length
@@ -46,8 +41,8 @@ export default {
 
     const restartGame = () => {
       cardList.value = _.shuffle(cardList.value)
-      lvl++
-      console.log(lvl)
+      lvl.value++
+      console.log(lvl.value)
       cardList.value = cardList.value.map((card, index) => {
         return {
           ...card,
@@ -57,8 +52,6 @@ export default {
         }
       })
     }
-
-    lvl = 1
 
     let cardItems = []
     for (let i = 0;  i <= 0; i++) {
@@ -148,7 +141,8 @@ export default {
       cardList,
       flipCard,
       userSelection,
-      restartGame
+      restartGame,
+      lvl
     }
   }
 }
@@ -157,7 +151,7 @@ export default {
 <template>
   <div class="q-pa-md bg-image">
     <q-layout class="vertical-center">
-      <h3 class="level" :key="lvl">Уровень {{lvl}}</h3>
+      <h3 class="level">Уровень {{lvl}}</h3>
       <h4 class="level" id="time">00:00</h4>
       <transition-group tag="section" class="game-board" name="shuffle-card">
         <Card
