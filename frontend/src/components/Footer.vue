@@ -82,21 +82,21 @@ export default {
 
 <style>
   .cat_card {
-    background-image: url('/images/footer_imgages/cat.jpg');
+    background-image: url('/images/footer_images/cat.jpg');
     background-size: 95px;
     border-radius: 20px;
     position: relative;
     border: 2px solid #d6bbf8;
   }
   .seal_card {
-    background-image: url('/images/seal1.jpg');
+    background-image: url('/images/footer_images/seal.jpg');
     background-size: 95px;
     border-radius: 20px;
     position: relative;
     border: 2px solid #d6bbf8;
   }
   .bunny_card {
-    background-image: url('/images/hare10.jpg');
+    background-image: url('/images/footer_images/hare.jpg');
     background-size: 98px;
     border-radius: 20px;
     position: relative;

@@ -61,7 +61,7 @@ export default {
     lvl = 1
 
     let cardItems = []
-    for (let i = 0;  i <= 0; i++) {
+    for (let i = 0;  i <= 9; i++) {
       let a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
       let b = a.toString()
       while (cardItems.includes(b)) {
