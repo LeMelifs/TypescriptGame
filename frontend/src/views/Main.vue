@@ -23,8 +23,6 @@
 <script lang="ts">
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
-import {computed} from "@vue/runtime-core";
-import {ref} from "vue";
 
 export default {
   name: 'Main',

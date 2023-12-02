@@ -53,9 +53,9 @@ export default {
     }
 
     let cardItems = []
-    for (let i = 0;  i <= 9; i++) {
-      let a = Math.floor(Math.random() * 20) + 1
-      let b = a.toString()
+    for (let i: number = 0;  i <= 9; i++) {
+      let a: number = Math.floor(Math.random() * 20) + 1
+      let b: string = a.toString()
       while (cardItems.includes(b)) {
         a = Math.floor(Math.random() * 20) + 1
         b = a.toString()
@@ -63,7 +63,7 @@ export default {
       cardItems.push(b)
     }
 
-    cardItems.forEach((item) => {
+    cardItems.forEach((item: any) => {
       cardList.value.push({
         value: item,
         variant: 1,
@@ -89,22 +89,24 @@ export default {
     })
 
     let count: number = 0
-    const flipCard = (payload: any) => {
+    const flipCard = (payload: any) : void => {
       if (count != 2) {
-        cardList.value[payload.position].visible = true
-        if (userSelection.value[0]) {
-          if (
-              userSelection.value[0].position === payload.position &&
-              userSelection.value[0].faceValue === payload.faceValue
-          ) {
-            return
+        if (!cardList.value[payload.position].matched) {
+          cardList.value[payload.position].visible = true
+          if (userSelection.value[0]) {
+            if (
+                userSelection.value[0].position === payload.position &&
+                userSelection.value[0].faceValue === payload.faceValue
+            ) {
+              return
+            } else {
+              userSelection.value[1] = payload
+              count++
+            }
           } else {
-            userSelection.value[1] = payload
+            userSelection.value[0] = payload
             count++
           }
-        } else {
-          userSelection.value[0] = payload
-          count++
         }
       }
     }
