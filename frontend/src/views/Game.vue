@@ -171,7 +171,7 @@ export default {
         />
       </transition-group>
       <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()">
-        <q-btn style="background: #ff0080; color: white" label="Выход" />
+        <q-btn style="background: #fa3e9c; color: white; border-radius: 15px; margin-top: 15px; width: 100px" label="Выход" />
       </div>
 
     </q-layout>

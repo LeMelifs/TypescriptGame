@@ -1,8 +1,8 @@
 <template>
-  <q-header reveal class="bg-purple-2 text-black" height-hint="98">
+  <q-header reveal class="bg-purple-2 text-black shadow-2" height-hint="98" style="border-bottom: 4px solid #d4abe1">
     <q-toolbar>
       <q-toolbar-title>
-        <div class="row justify-center text-weight-bold q-ml-xl">
+        <div class="row justify-center text-grey-9 text-h5 text-weight-bold q-ml-xl">
           Главное меню
         </div>
       </q-toolbar-title>
@@ -10,7 +10,7 @@
       <q-btn @click="drawerRight = !drawerRight" dense flat round icon="menu" />
     </q-toolbar>
   </q-header>
-  <q-drawer
+  <q-drawer style="border-left: 4px solid #e1d3ea" class="shadow-20"
       side="right"
       v-model="drawerRight"
 
@@ -23,7 +23,7 @@
       bordered
       :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'"
   >
-  <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
+  <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }" >
     <q-list padding>
 
       <q-item >
@@ -31,7 +31,7 @@
           <q-icon name="star" />
         </q-item-section>
 
-        <q-item-section class="text-weight-bold flex-center q-pr-lg">
+        <q-item-section class="text-grey-9 text-weight-bold flex-center q-pr-lg" style="font-size: 20px">
           Таблица рекордов
         </q-item-section>
       </q-item>

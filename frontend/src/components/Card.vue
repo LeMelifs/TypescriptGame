@@ -71,10 +71,11 @@ export default {
 }
 
 .card-face {
-  width: 100%;
-  height: 100%;
+  width: 105%;
+  height: 104%;
   position: absolute;
-  border-radius: 10px;
+  border-radius: 15px;
+  border: 3px solid #ec62a7;
   display: flex;
   align-items: center;
   justify-content: center;
