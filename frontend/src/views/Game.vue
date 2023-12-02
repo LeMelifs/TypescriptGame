@@ -54,10 +54,10 @@ export default {
 
     let cardItems = []
     for (let i = 0;  i <= 9; i++) {
-      let a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
+      let a = Math.floor(Math.random() * 20) + 1
       let b = a.toString()
       while (cardItems.includes(b)) {
-        a = Math.floor(Math.random() * (26 - 1 + 1)) + 1
+        a = Math.floor(Math.random() * 20) + 1
         b = a.toString()
       }
       cardItems.push(b)

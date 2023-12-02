@@ -83,7 +83,7 @@ export default {
 }
 
 .card-face.is-front {
-  background-image: url('/images/cat_theme.png');
+  background-image: url('/images/cat1.jpg');
   color: white;
   transform: rotateY(180deg);
 }
