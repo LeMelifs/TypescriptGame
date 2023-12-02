@@ -50,7 +50,7 @@ export default {
   <div class="card" :class="flippedStyles"
        @click="selectCard">
     <div class="card-face is-front" style="text-align: center; color: black">
-      <img :src="`/images/${Footer.data().theme}${value}.jpg`" :alt="value" style="border-radius: 10px">
+      <img :src="`/images/${Footer.data().theme.value}${value}.jpg`" :alt="value" style="border-radius: 10px">
       <img v-if="matched" src="/images/checkmark.png" alt="checkmark" class="icon-checkmark">
     </div>
     <div class="card-face is-back">
