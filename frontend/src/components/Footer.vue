@@ -111,24 +111,24 @@ export default {
   }
 
   .cat-hover {
-    border: 5px solid #d6bbf8;
+    border: 4px solid #d6bbf8;
     margin-top: 1px;
-    margin-left: -5.8px;
+    margin-left: -4px;
     box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.5);
   }
   .bunny-hover {
-    border: 5px solid #d6bbf8;
-    margin-top: 9px;
-    margin-bottom: 10.4px;
-    margin-left: -2.8px;
-    margin-right: -2.8px;
+    border: 4px solid #d6bbf8;
+    margin-top: 10px;
+    margin-bottom: 11px;
+    margin-left: -2px;
+    margin-right: -2px;
     box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.6);
   }
 
   .seal-hover {
-    border: 5px solid #d6bbf8;
+    border: 4px solid #d6bbf8;
     margin-top: 1px;
-    margin-right: -5.8px;
+    margin-right: -4px;
     box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.6);
   }
 </style>
