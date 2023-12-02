@@ -40,7 +40,7 @@ export default {
 
 <style>
 .bg-image {
-  background-image: url('/images/footer_imgages/bd_main.jpg');
+  background-image: url('/images/footer_images/bd_main.jpg');
   background-size: 1600px;
 }
 </style>
