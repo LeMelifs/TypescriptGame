@@ -1,5 +1,6 @@
 from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
@@ -113,9 +114,9 @@ async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: 
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 async def root():
-    return {"message": "Hello World"}
+    return RedirectResponse("/docs")
 
 
 @app.get("/users/me", response_model=schemas.User)
