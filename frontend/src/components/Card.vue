@@ -27,7 +27,7 @@ export default {
     },
   },
   setup(props: any, context: any) {
-    const flippedStyles = computed(() => {
+    const flippedStyles = computed(() : string => {
       if (props.visible) {
         return 'is-flipped'
       }

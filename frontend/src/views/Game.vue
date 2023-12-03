@@ -21,7 +21,7 @@ export default {
       this.$router.push('/main_menu')
     },
     start() {
-      const clock: HTMLElement = document.getElementById('time')
+      const clock: HTMLElement = document.getElementById('time')!
       let time: number = -1, intervalId: number
       function incrementTime() : void {
         time++
@@ -45,7 +45,7 @@ export default {
     let record = ref('')
     let count: number = 0
 
-    const remainingPairs = computed(() => {
+    const remainingPairs = computed(() : number => {
       const remainingCards: number = cardList.value.filter((card) => card.matched === false).length
       return remainingCards / 2
     })
@@ -57,7 +57,7 @@ export default {
         spawn()
       }
       else {
-        let time: HTMLElement = document.getElementById('time')
+        let time: HTMLElement = document.getElementById('time')!
         record.value = time.textContent
       }
     }
