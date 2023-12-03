@@ -20,29 +20,26 @@
       <q-separator />
 
       <q-card-actions align="center" style="border-left: 4px solid #e1d3ea; border-right: 4px solid #e1d3ea">
-        <div class="q-ma-md row items-start q-gutter-md justify-center cat_card shadow-2">
-          <q-card class="my-card q-ma-xl">
-          </q-card>
+        <div @mouseenter="hover1 = true" @mouseleave="hover1 = false" :class="{ 'cat-hover': hover1 }" class="row items-start  justify-center cat_card shadow-2">
+          <q-card class="my-card q-ma-xl"> </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center bunny_card shadow-2" style="margin-left: 40px; margin-right: 40px">
-          <q-card class="my-card q-ma-xl" bordered: true>
-          </q-card>
+        <div @mouseenter="hover2 = true" @mouseleave="hover2 = false" :class="{ 'bunny-hover': hover2}" class="row items-start  justify-center bunny_card shadow-2">
+          <q-card class="my-card q-ma-xl"> </q-card>
         </div>
 
-        <div class="q-ma-md row items-start q-gutter-md justify-center seal_card shadow-2">
-          <q-card class="my-card q-ma-xl">
-          </q-card>
+        <div @mouseenter="hover3 = true" @mouseleave="hover3 = false" :class="{ 'seal-hover': hover3 }" class="row items-start  justify-center seal_card shadow-2">
+          <q-card class="my-card q-ma-xl"> </q-card>
         </div>
 
       </q-card-actions>
 
       <q-separator />
 
-      <q-card-actions align="center" class="bg-purple-1" style="height: 65px; border-left: 4px solid #d6bde5; border-right: 4px solid #d6bde5">
-        <q-btn @click="changeTheme('cat')" push text-color="purple-8" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('hare')" push text-color="purple-8" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
-        <q-btn @click="changeTheme('seal')" push text-color="purple-8" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+      <q-card-actions align="center" class="bg-purple-1" style="height: 73px; border-left: 4px solid #d6bde5; border-right: 4px solid #d6bde5">
+        <q-btn @click="changeTheme('cat', 'Котики')" push text-color="purple-8" label="Котики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('hare', 'Зайчики')" push text-color="purple-8" label="Зайчики" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
+        <q-btn @click="changeTheme('seal', 'Нерпы')" push text-color="purple-8" label="Нерпы" color="white" style="width: 155px; border-radius: 15px" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -50,19 +47,23 @@
 
 <script lang="ts">
 import { ref } from 'vue'
-let theme = 'cat'
+let theme = ref('cat')
+let rus_theme = ref('Котики')
 export default {
   name: 'Footer',
   methods: {
-    changeTheme(chosen_theme) {
-      theme = chosen_theme
-      console.log(theme)
-      debugger;
+    changeTheme(chosen_theme, rus) {
+      theme.value = chosen_theme
+      rus_theme.value = rus
     }
   },
   data() {
     return {
-      theme: theme
+      theme: theme,
+      rus_theme: rus_theme,
+      hover1: false,
+      hover2: false,
+      hover3: false,
     }
   },
   setup () {
@@ -82,24 +83,49 @@ export default {
 
 <style>
   .cat_card {
-    background-image: url('/images/footer_imgages/cat.jpg');
+    background-image: url('/images/footer_images/cat.jpg');
     background-size: 95px;
     border-radius: 20px;
     position: relative;
     border: 2px solid #d6bbf8;
+    margin-right: 52px;
   }
-  .seal_card {
-    background-image: url('/images/seal1.jpg');
-    background-size: 95px;
-    border-radius: 20px;
-    position: relative;
-    border: 2px solid #d6bbf8;
-  }
+
   .bunny_card {
-    background-image: url('/images/hare10.jpg');
+    background-image: url('/images/footer_images/hare.jpg');
     background-size: 98px;
     border-radius: 20px;
     position: relative;
     border: 2px solid #d6bbf8;
+    margin-top: 12px;
+    margin-bottom: 13px;
+  }
+
+  .seal_card {
+    background-image: url('/images/footer_images/seal.jpg');
+    background-size: 95px;
+    border-radius: 20px;
+    position: relative;
+    border: 2px solid #d6bbf8;
+    margin-left: 52px;
+  }
+
+  .cat-hover {
+    border: 4px solid #d6bbf8;
+    margin-top: 1px;
+    margin-right: 48px;
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.5);
+  }
+  .bunny-hover {
+    border: 4px solid #d6bbf8;
+    margin: 10px -2px 11px;
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.6);
+  }
+
+  .seal-hover {
+    border: 4px solid #d6bbf8;
+    margin-top: 1px;
+    margin-left: 48px;
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.6);
   }
 </style>

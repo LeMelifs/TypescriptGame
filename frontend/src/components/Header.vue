@@ -13,11 +13,9 @@
   <q-drawer style="border-left: 4px solid #e1d3ea" class="shadow-20"
       side="right"
       v-model="drawerRight"
-
       :mini="miniState"
       @mouseover="miniState = false"
       @mouseout="miniState = true"
-
       :width="300"
       :breakpoint="500"
       bordered

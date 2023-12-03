@@ -27,7 +27,7 @@ export default {
     },
   },
   setup(props: any, context: any) {
-    const flippedStyles = computed(() => {
+    const flippedStyles = computed(() : string => {
       if (props.visible) {
         return 'is-flipped'
       }
@@ -50,7 +50,7 @@ export default {
   <div class="card" :class="flippedStyles"
        @click="selectCard">
     <div class="card-face is-front" style="text-align: center; color: black">
-      <img :src="`/images/${Footer.data().theme}${value}.jpg`" :alt="value" style="border-radius: 10px">
+      <img :src="`/images/${Footer.data().theme.value}${value}.jpg`" :alt="value" style="border-radius: 13px">
       <img v-if="matched" src="/images/checkmark.png" alt="checkmark" class="icon-checkmark">
     </div>
     <div class="card-face is-back">
@@ -83,7 +83,7 @@ export default {
 }
 
 .card-face.is-front {
-  background-image: url('/images/cat_theme.png');
+  background-image: url('/images/cat1.jpg');
   color: white;
   transform: rotateY(180deg);
 }
