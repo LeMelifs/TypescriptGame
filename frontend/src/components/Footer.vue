@@ -113,7 +113,7 @@ export default {
   .cat-hover {
     border: 4px solid #d6bbf8;
     margin-top: 1px;
-    margin-left: -4px;
+    margin-right: 48px;
     box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.5);
   }
   .bunny-hover {
@@ -128,7 +128,7 @@ export default {
   .seal-hover {
     border: 4px solid #d6bbf8;
     margin-top: 1px;
-    margin-right: -4px;
+    margin-left: 48px;
     box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.6);
   }
 </style>
