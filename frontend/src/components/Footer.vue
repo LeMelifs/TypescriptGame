@@ -114,21 +114,18 @@ export default {
     border: 4px solid #d6bbf8;
     margin-top: 1px;
     margin-right: 48px;
-    box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.5);
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.5);
   }
   .bunny-hover {
     border: 4px solid #d6bbf8;
-    margin-top: 10px;
-    margin-bottom: 11px;
-    margin-left: -2px;
-    margin-right: -2px;
-    box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.6);
+    margin: 10px -2px 11px;
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.6);
   }
 
   .seal-hover {
     border: 4px solid #d6bbf8;
     margin-top: 1px;
     margin-left: 48px;
-    box-shadow: 0px 0px 30px rgba(214, 187, 248, 0.6);
+    box-shadow: 0 0 30px rgba(214, 187, 248, 0.6);
   }
 </style>
