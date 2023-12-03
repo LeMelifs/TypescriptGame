@@ -21,9 +21,9 @@ export default {
       this.$router.push('/main_menu')
     },
     start() {
-      const clock = document.getElementById('time')
+      const clock: HTMLElement = document.getElementById('time')
       let time: number = -1, intervalId
-      function incrementTime() {
+      function incrementTime() : void {
         time++
         clock.textContent =
           ('0' + Math.trunc(time / 60)).slice(-2) + ':' + ('0' + (time % 60)).slice(-2)
@@ -34,14 +34,16 @@ export default {
   },
   mounted: function(){
     this.start()
+    this.spawn()
   },
   setup() {
     const cardList = ref([])
     const userSelection = ref([])
     const lvl = ref(1)
-    const levels = [3, 5, 7, 9, 11]
+    const levels: number[] = [3, 5, 7, 9, 11]
     let cardItems = []
     let record = ref('')
+    let count: number = 0
 
     const remainingPairs = computed(() => {
       const remainingCards: number = cardList.value.filter((card) => card.matched === false).length
@@ -51,43 +53,8 @@ export default {
     const restartGame = () => {
       cardList.value = _.shuffle(cardList.value)
       lvl.value++
-      cardItems.length = 0
-      cardList.value.length = 0
       if (lvl.value <= 5) {
-        for (let i: number = 0; i <= levels[lvl.value - 1]; i++) {
-          let a: number = Math.floor(Math.random() * 20) + 1
-          let b: string = a.toString()
-          while (cardItems.includes(b)) {
-            a = Math.floor(Math.random() * 20) + 1
-            b = a.toString()
-          }
-          cardItems.push(b)
-        }
-        cardItems.forEach((item: any) => {
-          cardList.value.push({
-            value: item,
-            variant: 1,
-            visible: false,
-            position: null,
-            matched: false
-          })
-          cardList.value.push({
-            value: item,
-            variant: 2,
-            visible: false,
-            position: null,
-            matched: false
-          })
-        })
-        cardList.value = _.shuffle(cardList.value)
-        cardList.value = cardList.value.map((card, index) => {
-          return {
-            ...card,
-            matched: false,
-            visible: false,
-            position: index
-          }
-        })
+        spawn()
       }
       else {
         let time = document.getElementById('time')
@@ -95,42 +62,45 @@ export default {
       }
     }
 
-    for (let i: number = 0;  i <= levels[lvl.value - 1]; i++) {
-      let a: number = Math.floor(Math.random() * 20) + 1
-      let b: string = a.toString()
-      while (cardItems.includes(b)) {
-        a = Math.floor(Math.random() * 20) + 1
-        b = a.toString()
+    function spawn() {
+      cardItems.length = 0
+      cardList.value.length = 0
+      for (let i: number = 0; i <= levels[lvl.value - 1]; i++) {
+        let a: number = Math.floor(Math.random() * 20) + 1
+        let b: string = a.toString()
+        while (cardItems.includes(b)) {
+          a = Math.floor(Math.random() * 20) + 1
+          b = a.toString()
+        }
+        cardItems.push(b)
       }
-      cardItems.push(b)
+      cardItems.forEach((item: any) => {
+        cardList.value.push({
+          value: item,
+          variant: 1,
+          visible: false,
+          position: null,
+          matched: false
+        })
+        cardList.value.push({
+          value: item,
+          variant: 2,
+          visible: false,
+          position: null,
+          matched: false
+        })
+      })
+      cardList.value = _.shuffle(cardList.value)
+      cardList.value = cardList.value.map((card, index) => {
+        return {
+          ...card,
+          matched: false,
+          visible: false,
+          position: index
+        }
+      })
     }
 
-    cardItems.forEach((item: any) => {
-      cardList.value.push({
-        value: item,
-        variant: 1,
-        visible: false,
-        position: null,
-        matched: false
-      })
-      cardList.value.push({
-        value: item,
-        variant: 2,
-        visible: false,
-        position: null,
-        matched: false
-      })
-    })
-
-    cardList.value = _.shuffle(cardList.value)
-    cardList.value = cardList.value.map((card, index) => {
-      return {
-        ...card,
-        position: index
-      }
-    })
-
-    let count: number = 0
     const flipCard = (payload: any) : void => {
       if (count != 2) {
         if (!cardList.value[payload.position].matched) {
@@ -186,7 +156,8 @@ export default {
       userSelection,
       restartGame,
       lvl,
-      record
+      record,
+      spawn
     }
   }
 }
@@ -287,6 +258,7 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .game-board2 {
@@ -297,6 +269,7 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .game-board3 {
@@ -307,6 +280,7 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .game-board4 {
@@ -317,6 +291,7 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .game-board5 {
@@ -327,6 +302,7 @@ export default {
   grid-row-gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .shuffle-card-move {
