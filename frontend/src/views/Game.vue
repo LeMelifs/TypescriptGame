@@ -22,7 +22,7 @@ export default {
     },
     start() {
       const clock: HTMLElement = document.getElementById('time')
-      let time: number = -1, intervalId
+      let time: number = -1, intervalId: number
       function incrementTime() : void {
         time++
         clock.textContent =
@@ -50,19 +50,19 @@ export default {
       return remainingCards / 2
     })
 
-    const restartGame = () => {
+    const restartGame = () : void => {
       cardList.value = _.shuffle(cardList.value)
       lvl.value++
       if (lvl.value <= 5) {
         spawn()
       }
       else {
-        let time = document.getElementById('time')
+        let time: HTMLElement = document.getElementById('time')
         record.value = time.textContent
       }
     }
 
-    function spawn() {
+    function spawn() : void {
       cardItems.length = 0
       cardList.value.length = 0
       for (let i: number = 0; i <= levels[lvl.value - 1]; i++) {
@@ -76,27 +76,27 @@ export default {
       }
       cardItems.forEach((item: any) => {
         cardList.value.push({
-          value: item,
-          variant: 1,
-          visible: false,
-          position: null,
-          matched: false
+          value: item as any,
+          variant: 1 as number,
+          visible: false as boolean,
+          position: null as number,
+          matched: false as boolean
         })
         cardList.value.push({
-          value: item,
-          variant: 2,
-          visible: false,
-          position: null,
-          matched: false
+          value: item as any,
+          variant: 2 as number,
+          visible: false as boolean,
+          position: null as number,
+          matched: false as boolean
         })
       })
       cardList.value = _.shuffle(cardList.value)
       cardList.value = cardList.value.map((card, index) => {
         return {
           ...card,
-          matched: false,
-          visible: false,
-          position: index
+          matched: false as boolean,
+          visible: false as boolean,
+          position: index as number
         }
       })
     }
