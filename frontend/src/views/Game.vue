@@ -256,9 +256,7 @@ export default {
             @select-card="flipCard"
         />
       </transition-group>
-      <div style="text-align: center; margin-top: 10px" @click.prevent="mainMenuClick()">
-        <q-btn style="background: #fa3e9c; color: white; border-radius: 15px; top: 15px; width: 100px" label="Выход" />
-      </div>
+        <q-btn style="background: #fa3e9c; color: white; margin: 0 auto; display: block; border-radius: 15px; top: 15px; width: 100px" @click.prevent="mainMenuClick()" label="Выход" />
     </q-layout>
   </div>
 </template>
