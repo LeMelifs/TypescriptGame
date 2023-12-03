@@ -5,6 +5,7 @@ import { watch } from '@vue/runtime-core'
 import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
 import Footer from "../components/Footer.vue";
+import PageLoader from "../App.vue";
 
 export default {
   name: 'Game',
@@ -14,6 +15,7 @@ export default {
     }
   },
   components: {
+    PageLoader,
     Card
   },
   methods: {
@@ -323,5 +325,9 @@ export default {
   width: 300px;
   border: solid #fff;
   border-radius: 15px;
+}
+
+div {
+  user-select: none;
 }
 </style>
