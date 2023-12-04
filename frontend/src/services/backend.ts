@@ -8,7 +8,7 @@ interface Result {
 }
 
 class Backend {
-  async login(username: String, password: String): Promise<Boolean> {
+  async login(username: string, password: string): Promise<boolean> {
     return axios.post(API_URL + 'token', {
       username: username,
       password: password
@@ -16,8 +16,8 @@ class Backend {
       headers: { 'content-type': 'application/x-www-form-urlencoded' }
     })
       .then(response => {
-        localStorage.setItem('username', username.toString())
-        localStorage.setItem('password', password.toString())
+        localStorage.setItem('username', username)
+        localStorage.setItem('password', password)
         localStorage.setItem('token', response.data.token)
         return true
       })
