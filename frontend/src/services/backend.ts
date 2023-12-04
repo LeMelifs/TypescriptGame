@@ -2,6 +2,11 @@ import axios from 'axios'
 
 const API_URL: String = 'http://localhost:8000/'
 
+interface Result {
+  username: string;
+  result: number;
+}
+
 class Backend {
   async login(username: String, password: String): Promise<Boolean> {
     return axios.post(API_URL + 'token', {
@@ -19,6 +24,16 @@ class Backend {
       .finally(() => {
         localStorage.clear()
         return false
+      })
+  }
+
+  async results(): Promise<[Result]> {
+    return axios.get(API_URL + 'results')
+      .then(response => {
+        return response.data
+      })
+      .catch(_ => {
+        return []
       })
   }
 }
