@@ -56,7 +56,12 @@ export default {
     const results = ref('')
     backend.results().then(serverResults => {
       results.value = serverResults
-        .map(result => result.username + ' // ' + result.result)
+        .map(result => {
+          const minutes = Math.floor(result.result / 60)
+          const seconds = result.result % 60
+          const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
+          return result.username + ' // ' + formattedNum(minutes) + ':' + formattedNum(seconds)
+        })
         .join('<br>')
     });
 
