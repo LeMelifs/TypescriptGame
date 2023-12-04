@@ -180,7 +180,7 @@ export default {
       <h3 class="level" v-if="lvl <= 5">Уровень {{lvl}}</h3>
       <div v-else>
         <h2 class="record">Вы справились за <br>{{ record }}!</h2>
-        <img class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
+        <img alt='' class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
       </div>
       <h4 class="level" id="time" v-if="lvl <= 5">00:00</h4>
       <transition-group v-if="lvl === 1" tag="section" class="game-board1" name="shuffle-card">
