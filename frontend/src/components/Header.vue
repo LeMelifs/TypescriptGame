@@ -36,9 +36,7 @@
 
       <q-separator />
       <q-item >
-        <q-item-section class="flex-center">
-          username // time
-        </q-item-section>
+        <q-item-section class="flex-center" v-html="results"></q-item-section>
       </q-item>
 
     </q-list>
@@ -49,13 +47,23 @@
 <script lang="ts">
 
 import { ref } from 'vue'
+import axios from 'axios'
+import backend from '../services/backend'
 
 export default {
   name: 'Header',
   setup () {
+    const results = ref('')
+    backend.results().then(serverResults => {
+      results.value = serverResults
+        .map(result => result.username + ' // ' + result.result)
+        .join('<br>')
+    });
+
     return {
       drawerRight: ref(false),
-      miniState: ref(true)
+      miniState: ref(true),
+      results: results
     }
   }
 }
