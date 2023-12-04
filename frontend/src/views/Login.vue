@@ -20,12 +20,17 @@
 
 <script lang="ts">
 import {ref} from "vue";
+import backend from "../services/backend.ts";
 
 export default {
   name: 'Login',
   methods: {
-    mainMenuClick(){
-      this.$router.push('/main_menu');
+    async mainMenuClick() {
+      let result: Boolean = await backend.login(this.username, this.password)
+      if (result)
+        this.$router.push('/main_menu')
+      else
+        console.log('Неверные данные')
     }
   },
   setup () {
