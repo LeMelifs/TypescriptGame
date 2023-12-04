@@ -15,8 +15,11 @@ class User(BaseModel):
     hashed_password: str
 
 
-class LeaderboardResult(BaseModel):
+class SimpleResult(BaseModel):
     result: int
+
+
+class LeaderboardResult(SimpleResult):
     user: User
 
     class Config:

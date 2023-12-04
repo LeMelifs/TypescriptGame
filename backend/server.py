@@ -77,8 +77,7 @@ def get_results(db: Session):
     return db.query(models.LeaderboardResult).order_by("result").limit(20).all()
 
 
-def create_new_result(db: Session, user: schemas.User, result: int):
-    result = models.LeaderboardResult(result=result, username=user.username)
+def create_new_result(db: Session, result: schemas.LeaderboardResult):
     db.add(result)
     db.commit()
     db.refresh(result)
@@ -150,6 +149,8 @@ async def leaderboard(db: Session = Depends(get_db)):
 
 
 @app.post('/result')
-async def new_result(current_user: Annotated[schemas.User, Depends(get_current_user)], result: int,
+async def new_result(result: schemas.SimpleResult,
+                     current_user: Annotated[schemas.User, Depends(get_current_user)],
                      db: Session = Depends(get_db)):
-    return create_new_result(db, current_user, result)
+    db_result = models.LeaderboardResult(result=result.result, username=current_user.username)
+    return create_new_result(db, db_result)
