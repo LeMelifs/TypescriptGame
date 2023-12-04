@@ -73,6 +73,10 @@ def authenticate_user(db: Session, username: str, password: str):
     return user
 
 
+def get_user_result(db: Session, username: str):
+    model = models.LeaderboardResult
+    return db.query(model).filter(model.username == username).order_by("result").first()
+
 def get_results(db: Session):
     return db.query(models.LeaderboardResult).order_by("result").limit(20).all()
 
@@ -146,6 +150,11 @@ async def read_users_me(current_user: Annotated[schemas.User, Depends(get_curren
 @app.get("/results")
 async def leaderboard(db: Session = Depends(get_db)):
     return get_results(db)
+
+
+@app.get("/results/me")
+async def leaderboard(current_user: Annotated[schemas.User, Depends(get_current_user)], db: Session = Depends(get_db)):
+    return get_user_result(db, current_user.username)
 
 
 @app.post('/result')
