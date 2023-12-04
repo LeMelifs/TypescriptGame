@@ -6,6 +6,7 @@ import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
 import Footer from "../components/Footer.vue";
 import PageLoader from "../App.vue";
+import backend from '../services/backend'
 
 export default {
   name: 'Game',
@@ -19,19 +20,24 @@ export default {
     Card
   },
   methods: {
+    formatTime(time) {
+      const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
+      const minutes = Math.trunc(time / 60)
+      const seconds = time % 60
+      return formattedNum(minutes) + ':' + formattedNum(seconds)
+    },
     mainMenuClick() {
       this.$router.push('/main_menu')
     },
     start() {
       const clock: HTMLElement = document.getElementById('time')!
-      let time: number = -1, intervalId: number
-      function incrementTime() : void {
-        time++
-        clock.textContent =
-          ('0' + Math.trunc(time / 60)).slice(-2) + ':' + ('0' + (time % 60)).slice(-2)
-      }
-      incrementTime()
-      intervalId = setInterval(incrementTime, 1000)
+      this.time = 0
+      let intervalId: number
+      clock.textContent = this.formatTime(0)
+      intervalId = setInterval(() => {
+        this.time++
+        clock.textContent = this.formatTime(this.time)
+      }, 1000)
     },
   },
   mounted: function(){
@@ -42,6 +48,7 @@ export default {
     const cardList = ref([])
     const userSelection = ref([])
     const lvl = ref(1)
+    const time = ref(-1)
     const levels: number[] = [3, 5, 7, 9, 11]
     let cardItems = []
     let record = ref('')
@@ -59,8 +66,9 @@ export default {
         spawn()
       }
       else {
-        let time: HTMLElement = document.getElementById('time')!
-        record.value = time.textContent
+        backend.saveResult(time.value)
+        let timeElement: HTMLElement = document.getElementById('time')!
+        record.value = timeElement.textContent
       }
     }
 
@@ -159,7 +167,8 @@ export default {
       restartGame,
       lvl,
       record,
-      spawn
+      spawn,
+      time
     }
   }
 }

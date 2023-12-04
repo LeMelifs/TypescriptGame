@@ -47,7 +47,6 @@
 <script lang="ts">
 
 import { ref } from 'vue'
-import axios from 'axios'
 import backend from '../services/backend'
 
 export default {
@@ -57,7 +56,7 @@ export default {
     backend.results().then(serverResults => {
       results.value = serverResults
         .map(result => {
-          const minutes = Math.floor(result.result / 60)
+          const minutes = Math.trunc(result.result / 60)
           const seconds = result.result % 60
           const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
           return result.username + ' // ' + formattedNum(minutes) + ':' + formattedNum(seconds)
