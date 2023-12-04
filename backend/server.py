@@ -30,6 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 def get_db():
     db = SessionLocal()
     try:
@@ -70,6 +71,18 @@ def authenticate_user(db: Session, username: str, password: str):
     if not verify_password(password, user.hashed_password):
         return False
     return user
+
+
+def get_results(db: Session):
+    return db.query(models.LeaderboardResult).order_by("result").limit(20).all()
+
+
+def create_new_result(db: Session, user: schemas.User, result: int):
+    result = models.LeaderboardResult(result=result, username=user.username)
+    db.add(result)
+    db.commit()
+    db.refresh(result)
+    return result
 
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
@@ -131,6 +144,12 @@ async def read_users_me(current_user: Annotated[schemas.User, Depends(get_curren
     return current_user
 
 
-@app.get("/users/me/items/")
-async def read_own_items(current_user: Annotated[schemas.User, Depends(get_current_user)]):
-    return [{"item_id": "Foo", "owner": current_user.username}]
+@app.get("/results")
+async def leaderboard(db: Session = Depends(get_db)):
+    return get_results(db)
+
+
+@app.post('/result')
+async def new_result(current_user: Annotated[schemas.User, Depends(get_current_user)], result: int,
+                     db: Session = Depends(get_db)):
+    return create_new_result(db, current_user, result)
