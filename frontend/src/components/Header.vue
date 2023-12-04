@@ -54,7 +54,7 @@ export default {
   setup () {
     const results = ref('')
     backend.results().then(serverResults => {
-      results.value = serverResults
+      results.value = serverResults.length === 0 ? 'Нет ни одного рекорда' : serverResults
         .map(result => {
           const minutes = Math.trunc(result.result / 60)
           const seconds = result.result % 60
