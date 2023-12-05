@@ -35,6 +35,9 @@
       </q-item>
 
       <q-separator />
+      <q-item>
+        <q-item-section>Топ-10</q-item-section>
+      </q-item>
       <q-item >
         <q-item-section class="flex-center" v-html="results"></q-item-section>
       </q-item>
@@ -54,15 +57,18 @@ export default {
   setup () {
     const results = ref('')
     backend.results().then(serverResults => {
-      results.value = serverResults.length === 0 ? 'Нет ни одного рекорда' : serverResults
-        .map(result => {
-          const minutes = Math.trunc(result.result / 60)
-          const seconds = result.result % 60
-          const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
-          return result.username + ' // ' + formattedNum(minutes) + ':' + formattedNum(seconds)
-        })
-        .join('<br>')
-    });
+      const tempResults = serverResults.map(result => {
+        const minutes = Math.trunc(result.result / 60)
+        const seconds = result.result % 60
+        const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
+        return result.username + ' // ' + formattedNum(minutes) + ':' + formattedNum(seconds)
+      })
+      while (tempResults.length < 10)
+        tempResults.push('-')
+      results.value = tempResults.reduce((accumulator, current, index) => {
+        return accumulator + '<br>' + (index + 1).toString() + '. ' + current
+      }, '')
+    })
 
     return {
       drawerRight: ref(false),
