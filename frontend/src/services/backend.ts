@@ -23,10 +23,6 @@ class Backend {
     return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }
   }
 
-  authorizationHeaders() {
-    return { headers: { 'Authorization': 'Bearer ' + this.token } }
-  }
-
   async login(username: string, password: string): Promise<boolean> {
     return axios.post(API_URL + 'token', {
       username: username,
