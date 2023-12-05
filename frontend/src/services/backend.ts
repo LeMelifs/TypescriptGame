@@ -60,7 +60,7 @@ class Backend {
     return axios.post(API_URL + 'result', {
       'result': result
     }, this.authorizationHeaders())
-      .then(_ => true)
+      .then(res => res.data.is_new)
       .catch(_ => false)
   }
 }

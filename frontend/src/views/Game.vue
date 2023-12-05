@@ -51,7 +51,9 @@ export default {
     const time = ref(-1)
     const levels: number[] = [3, 5, 7, 9, 11]
     let cardItems = []
-    let record = ref('')
+    const record = ref('')
+    const new_record = ref(false)
+
     let count: number = 0
 
     const remainingPairs = computed(() : number => {
@@ -66,7 +68,7 @@ export default {
         spawn()
       }
       else {
-        backend.saveResult(time.value)
+        backend.saveResult(time.value).then(res => new_record.value = res)
         let timeElement: HTMLElement = document.getElementById('time')!
         record.value = timeElement.textContent
       }
@@ -167,6 +169,7 @@ export default {
       restartGame,
       lvl,
       record,
+      new_record,
       spawn,
       time
     }
@@ -180,6 +183,7 @@ export default {
       <h3 class="level" v-if="lvl <= 5">Уровень {{lvl}}</h3>
       <div v-else>
         <h2 class="record">Вы справились за <br>{{ record }}!</h2>
+        <h2 v-if="new_record">Новый рекорд!</h2>
         <img alt='' class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
       </div>
       <h4 class="level" id="time" v-if="lvl <= 5">00:00</h4>

@@ -85,6 +85,9 @@ def create_new_result(db: Session, result: schemas.LeaderboardResult):
     db.add(result)
     db.commit()
     db.refresh(result)
+    model = models.LeaderboardResult
+    first = db.query(models.LeaderboardResult).where(model.username == result.username).order_by("result").first()
+    result.is_new = result.id == first.id
     return result
 
 
