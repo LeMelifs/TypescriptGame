@@ -18,6 +18,10 @@ class Backend {
     this.token = ''
   }
 
+  authorizationHeaders() {
+    return { headers: { 'Authorization': 'Bearer ' + this.token } }
+  }
+
   async login(username: string, password: string): Promise<boolean> {
     return axios.post(API_URL + 'token', {
       username: username,
@@ -47,12 +51,16 @@ class Backend {
       })
   }
 
+  async getMyResult(): Promise<Result> {
+    return axios.get(API_URL + 'results/me', this.authorizationHeaders())
+      .then(result => result.data)
+      .catch(_ => undefined)
+  }
+
   async saveResult(result: number): Promise<boolean> {
     return axios.post(API_URL + 'result', {
       'result': result
-    }, {
-      headers: { 'Authorization': 'Bearer ' + this.token }
-    })
+    }, this.authorizationHeaders())
       .then(_ => true)
       .catch(_ => false)
   }
