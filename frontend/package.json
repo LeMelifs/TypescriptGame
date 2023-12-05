@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "author": "Чух-чух",
   "private": true,
-  "productName": "my-vue-app",
-  "description": "My Electron application description",
+  "productName": "SillyCardGame",
+  "description": "",
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
