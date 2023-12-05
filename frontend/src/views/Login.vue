@@ -9,8 +9,10 @@
         <q-card-section>
           <q-input dense outlined v-model="username" label="Имя"></q-input>
           <q-input dense outlined class="q-mt-md" v-model="password" type="password" label="Пароль"></q-input>
-          <span v-if="error">Неверные данные</span>
         </q-card-section>
+          <q-card-section class="text-center" style="margin-bottom: -20px; margin-top: -20px">
+          <span class="text-black-8" style="font-size: 1em; margin-left: 3px" v-if="error">Неверные данные</span>
+          </q-card-section>
         <q-card-section>
           <q-btn @click.prevent="mainMenuClick()" style="border-radius: 15px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width" ></q-btn>
         </q-card-section>

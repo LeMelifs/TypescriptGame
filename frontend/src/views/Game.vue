@@ -183,7 +183,7 @@ export default {
       <h3 class="level" v-if="lvl <= 5">Уровень {{lvl}}</h3>
       <div v-else>
         <h2 class="record">Вы справились за <br>{{ record }}!</h2>
-        <h2 v-if="new_record">Новый рекорд!</h2>
+        <h3 class="new_record" v-if="new_record">Новый рекорд!</h3>
         <img alt='' class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
       </div>
       <h4 class="level" id="time" v-if="lvl <= 5">00:00</h4>
@@ -338,6 +338,15 @@ export default {
   width: 300px;
   border: solid #fff;
   border-radius: 15px;
+}
+
+.new_record {
+  text-align: center;
+  color: white;
+  font-family: Ebrima, serif;
+  font-weight: bold;
+  text-shadow: 2px 1px 1px #d6bbf8;
+  margin-top: -30px;
 }
 
 div {
