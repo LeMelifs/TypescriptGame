@@ -24,3 +24,7 @@ class LeaderboardResult(SimpleResult):
 
     class Config:
         from_attributes = True
+
+
+class LeaderboardNewResult(LeaderboardResult):
+    is_new: bool

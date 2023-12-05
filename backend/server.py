@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, List
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -78,6 +78,7 @@ def get_user_result(db: Session, username: str):
     model = models.LeaderboardResult
     return db.query(model).filter(model.username == username).order_by("result").first()
 
+
 def get_results(db: Session):
     model = models.LeaderboardResult
     query = db.query(model.username, func.min(model.result).label("result")) \
@@ -90,7 +91,7 @@ def create_new_result(db: Session, result: schemas.LeaderboardResult):
     db.commit()
     db.refresh(result)
     model = models.LeaderboardResult
-    first = db.query(models.LeaderboardResult).where(model.username == result.username).order_by("result").first()
+    first = db.query(model).where(model.username == result.username).order_by("result").first()
     result.is_new = result.id == first.id
     return result
 
@@ -154,17 +155,17 @@ async def read_users_me(current_user: Annotated[schemas.User, Depends(get_curren
     return current_user
 
 
-@app.get("/results")
+@app.get("/results", response_model=List[schemas.LeaderboardResult])
 async def leaderboard(db: Session = Depends(get_db)):
     return get_results(db)
 
 
-@app.get("/results/me")
+@app.get("/results/me", response_model=schemas.LeaderboardResult)
 async def leaderboard(current_user: Annotated[schemas.User, Depends(get_current_user)], db: Session = Depends(get_db)):
     return get_user_result(db, current_user.username)
 
 
-@app.post('/result')
+@app.post('/result', response_model=schemas.LeaderboardNewResult)
 async def new_result(result: schemas.SimpleResult,
                      current_user: Annotated[schemas.User, Depends(get_current_user)],
                      db: Session = Depends(get_db)):
