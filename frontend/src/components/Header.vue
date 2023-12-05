@@ -36,9 +36,7 @@
 
       <q-separator />
       <q-item >
-        <q-item-section class="flex-center">
-          username // time
-        </q-item-section>
+        <q-item-section class="flex-center" v-html="results"></q-item-section>
       </q-item>
 
     </q-list>
@@ -49,13 +47,27 @@
 <script lang="ts">
 
 import { ref } from 'vue'
+import backend from '../services/backend'
 
 export default {
   name: 'Header',
   setup () {
+    const results = ref('')
+    backend.results().then(serverResults => {
+      results.value = serverResults.length === 0 ? 'Нет ни одного рекорда' : serverResults
+        .map(result => {
+          const minutes = Math.trunc(result.result / 60)
+          const seconds = result.result % 60
+          const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
+          return result.username + ' // ' + formattedNum(minutes) + ':' + formattedNum(seconds)
+        })
+        .join('<br>')
+    });
+
     return {
       drawerRight: ref(false),
-      miniState: ref(true)
+      miniState: ref(true),
+      results: results
     }
   }
 }

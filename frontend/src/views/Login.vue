@@ -9,6 +9,7 @@
         <q-card-section>
           <q-input dense outlined v-model="username" label="Имя"></q-input>
           <q-input dense outlined class="q-mt-md" v-model="password" type="password" label="Пароль"></q-input>
+          <span v-if="error">Неверные данные</span>
         </q-card-section>
         <q-card-section>
           <q-btn @click.prevent="mainMenuClick()" style="border-radius: 15px;" color="dark" rounded size="md" label="Продолжить" no-caps class="full-width" ></q-btn>
@@ -26,17 +27,19 @@ export default {
   name: 'Login',
   methods: {
     async mainMenuClick() {
+      this.error = false
       let result: Boolean = await backend.login(this.username, this.password)
       if (result)
         this.$router.push('/main_menu')
       else
-        console.log('Неверные данные')
+        this.error = true
     }
   },
   setup () {
     return {
       username: ref(''),
-      password: ref('')
+      password: ref(''),
+      error: ref(false)
     }
   }
 };

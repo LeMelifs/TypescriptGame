@@ -13,3 +13,14 @@ class TokenData(BaseModel):
 class User(BaseModel):
     username: str
     hashed_password: str
+
+
+class SimpleResult(BaseModel):
+    result: int
+
+
+class LeaderboardResult(SimpleResult):
+    user: User
+
+    class Config:
+        from_attributes = True

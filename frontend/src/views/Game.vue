@@ -6,6 +6,7 @@ import { computed } from '@vue/runtime-core'
 import _ from 'lodash'
 import Footer from "../components/Footer.vue";
 import PageLoader from "../App.vue";
+import backend from '../services/backend'
 
 export default {
   name: 'Game',
@@ -19,19 +20,24 @@ export default {
     Card
   },
   methods: {
+    formatTime(time) {
+      const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()
+      const minutes = Math.trunc(time / 60)
+      const seconds = time % 60
+      return formattedNum(minutes) + ':' + formattedNum(seconds)
+    },
     mainMenuClick() {
       this.$router.push('/main_menu')
     },
     start() {
       const clock: HTMLElement = document.getElementById('time')!
-      let time: number = -1, intervalId: number
-      function incrementTime() : void {
-        time++
-        clock.textContent =
-          ('0' + Math.trunc(time / 60)).slice(-2) + ':' + ('0' + (time % 60)).slice(-2)
-      }
-      incrementTime()
-      intervalId = setInterval(incrementTime, 1000)
+      this.time = 0
+      let intervalId: number
+      clock.textContent = this.formatTime(0)
+      intervalId = setInterval(() => {
+        this.time++
+        clock.textContent = this.formatTime(this.time)
+      }, 1000)
     },
   },
   mounted: function(){
@@ -42,9 +48,12 @@ export default {
     const cardList = ref([])
     const userSelection = ref([])
     const lvl = ref(1)
+    const time = ref(-1)
     const levels: number[] = [3, 5, 7, 9, 11]
     let cardItems = []
-    let record = ref('')
+    const record = ref('')
+    const new_record = ref(false)
+
     let count: number = 0
 
     const remainingPairs = computed(() : number => {
@@ -59,8 +68,9 @@ export default {
         spawn()
       }
       else {
-        let time: HTMLElement = document.getElementById('time')!
-        record.value = time.textContent
+        backend.saveResult(time.value).then(res => new_record.value = res)
+        let timeElement: HTMLElement = document.getElementById('time')!
+        record.value = timeElement.textContent
       }
     }
 
@@ -159,7 +169,9 @@ export default {
       restartGame,
       lvl,
       record,
-      spawn
+      new_record,
+      spawn,
+      time
     }
   }
 }
@@ -171,7 +183,8 @@ export default {
       <h3 class="level" v-if="lvl <= 5">Уровень {{lvl}}</h3>
       <div v-else>
         <h2 class="record">Вы справились за <br>{{ record }}!</h2>
-        <img class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
+        <h2 v-if="new_record">Новый рекорд!</h2>
+        <img alt='' class="image" :src="`/images/${Footer.data().theme.value}_final.jpg`">
       </div>
       <h4 class="level" id="time" v-if="lvl <= 5">00:00</h4>
       <transition-group v-if="lvl === 1" tag="section" class="game-board1" name="shuffle-card">
