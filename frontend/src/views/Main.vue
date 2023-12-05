@@ -6,7 +6,7 @@
       <q-card style=" border-radius: 15px" class="my-card shadow-24 flex-center" >
         <q-card-section class="bg-purple-2" style="border-top: 4px solid #d4abe1; border-left: 4px solid #d4abe1; border-right: 4px solid #d4abe1">
           <div class="text-grey-9 text-h5 text-weight-bold " style="margin-bottom: 10px; margin-right: 30px; margin-left: 30px; user-select: none">{{ record }}</div>
-          <div class="text-grey-8" style="margin-top: 8px; margin-left: 55px; user-select: none;">Выбранная тема: {{ Footer.data().rus_theme.value }}</div>
+          <div class="text-grey-8 text-center" style="margin-top: 8px; user-select: none;">Выбранная тема: {{ Footer.data().rus_theme.value }}</div>
         </q-card-section>
 
         <q-card-actions vertical align="center" style="border-bottom: 4px solid #d8c9e1; border-left: 4px solid #d8c9e1; border-right: 4px solid #d8c9e1;">
