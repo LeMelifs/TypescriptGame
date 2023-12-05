@@ -20,7 +20,7 @@ class SimpleResult(BaseModel):
 
 
 class LeaderboardResult(SimpleResult):
-    user: User
+    username: str
 
     class Config:
         from_attributes = True

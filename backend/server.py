@@ -7,6 +7,7 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 
+from sqlalchemy import func
 from sqlalchemy.orm import Session
 from . import models, schemas
 
@@ -78,7 +79,10 @@ def get_user_result(db: Session, username: str):
     return db.query(model).filter(model.username == username).order_by("result").first()
 
 def get_results(db: Session):
-    return db.query(models.LeaderboardResult).order_by("result").limit(20).all()
+    model = models.LeaderboardResult
+    query = db.query(model.username, func.min(model.result).label("result")) \
+        .group_by(model.username).order_by(model.result).limit(10)
+    return query.all()
 
 
 def create_new_result(db: Session, result: schemas.LeaderboardResult):
