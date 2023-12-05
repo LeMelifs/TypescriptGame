@@ -49,7 +49,6 @@ export default {
     const record = ref('')
     backend.getMyResult()
       .then(result => {
-        console.log(result)
         const minutes = Math.trunc(result.result / 60)
         const seconds = result.result % 60
         const formattedNum = (num) => (num < 10 ? '0' : '') + num.toString()

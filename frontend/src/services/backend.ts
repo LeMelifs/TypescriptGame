@@ -8,14 +8,19 @@ interface Result {
 }
 
 class Backend {
-  username: string
-  password: string
-  token: string
+
+  save(username: string, password: string, token: string) {
+    localStorage.setItem('username', username)
+    localStorage.setItem('password', password)
+    localStorage.setItem('token', token)
+  }
 
   clear() {
-    this.username = ''
-    this.password = ''
-    this.token = ''
+    localStorage.clear()
+  }
+
+  authorizationHeaders() {
+    return { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } }
   }
 
   authorizationHeaders() {
@@ -30,9 +35,7 @@ class Backend {
       headers: { 'content-type': 'application/x-www-form-urlencoded' }
     })
       .then(response => {
-        this.username = username
-        this.password = password
-        this.token = response.data.access_token
+        this.save(username, password, response.data.access_token)
         return true
       })
       .catch(_ => {
