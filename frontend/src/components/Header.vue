@@ -33,13 +33,9 @@
           Таблица рекордов
         </q-item-section>
       </q-item>
-
       <q-separator />
-      <q-item>
-        <q-item-section>Топ-10</q-item-section>
-      </q-item>
       <q-item >
-        <q-item-section class="flex-center" v-html="results"></q-item-section>
+        <q-item-section class="text-purple-3 text-weight-bold" style="font-size: 25px; font-style: italic; font-family: 'Monotype Corsiva', serif;" v-html="results"></q-item-section>
       </q-item>
 
     </q-list>
