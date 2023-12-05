@@ -1,4 +1,4 @@
-from typing import Annotated, List
+from typing import Annotated, List, Optional
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -160,7 +160,7 @@ async def leaderboard(db: Session = Depends(get_db)):
     return get_results(db)
 
 
-@app.get("/results/me", response_model=schemas.LeaderboardResult)
+@app.get("/results/me", response_model=Optional[schemas.SimpleResult])
 async def leaderboard(current_user: Annotated[schemas.User, Depends(get_current_user)], db: Session = Depends(get_db)):
     return get_user_result(db, current_user.username)
 
